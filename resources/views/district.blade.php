@@ -63,7 +63,7 @@
                                                 </li>
 
                                                 <li>
-                                                    <form action="{{ route('district.destroy', [$district->id]) }}" method="POST">
+                                                    <form id="deleteForm" action="{{ route('district.destroy', [$district->id]) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit">
@@ -77,6 +77,13 @@
                                     @endforeach
                                 </div>
                             @else
+
+                            <div>
+                                <h1>
+                                    No District In Database
+                                </h1>
+                            </div>
+
                             @endif
 
                         </div>
@@ -94,3 +101,4 @@
 
 
 </x-app-layout>
+<script src="{{ asset('JS/district.js') }}"></script>

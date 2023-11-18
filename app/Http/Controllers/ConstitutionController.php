@@ -11,7 +11,7 @@ class ConstitutionController extends Controller
      */
     public function index()
     {
-        return view('constitution');
+        return view('layouts.Constituency.constitution');
     }
 
     /**
@@ -19,7 +19,9 @@ class ConstitutionController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('layouts.Constituency.create-constuency');
+
     }
 
     /**
