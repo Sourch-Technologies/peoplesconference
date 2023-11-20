@@ -6,7 +6,10 @@
                 {{ __('Members') }}
             </h2>
             <x-secondary-button>
-                Create Member
+
+                <a href="{{ route('member.create') }}">
+                    Create Member
+                </a>
             </x-secondary-button>
         </div>
     </x-slot>
@@ -15,7 +18,7 @@
         <div class=" mx-auto sm:px-4 ">
             <div class="bg-white dark:bg-gray-800 overflow-hidden  sm:rounded">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("Members") }}
+
                 </div>
             </div>
         </div>

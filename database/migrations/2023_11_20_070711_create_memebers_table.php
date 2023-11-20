@@ -11,23 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('polling_stations', function (Blueprint $table) {
+        Schema::create('memebers', function (Blueprint $table) {
             $table->id();
-            $table->integer('SNO');
-            $table->string('locality');
-            $table->string('building_location');
-            $table->string('polling_area');
-            $table->bigInteger('total_votes');
+            $table->string('name');
+            $table->string('email');
+            $table->enum('gender', ['M','F','O']);
+            $table->enum('is_Active', ['0','1'])->default('0');
+            $table->string('photo');
             $table->foreignId('constituency_id')->constrained('constituencies')->onDelete('cascade');
             $table->timestamps();
         });
     }
+
+   
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('polling_stations');
+        Schema::dropIfExists('memebers');
     }
 };

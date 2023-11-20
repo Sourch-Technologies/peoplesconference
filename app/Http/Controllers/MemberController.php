@@ -11,7 +11,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return view('members');
+        return view('layouts.Member.members');
     }
 
     /**
@@ -19,7 +19,8 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('layouts.Member.create-member');
     }
 
     /**
