@@ -11,7 +11,7 @@ class PollingController extends Controller
      */
     public function index()
     {
-        return view('pollingstation');
+        return view('layouts.PollingStation.pollingstation');
     }
 
     /**

@@ -22,7 +22,12 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="url('pollingstation')" :active="Str::contains(request()->url(), 'pollingstation')">
+                    <x-nav-link :href="url('constituency')" :active="Str::contains(request()->url(), 'constituency')">
+                        {{ __('Constituency') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="url('pollingstation/index')" :active="Str::contains(request()->url(), 'pollingstation')">
                         {{ __('Polling Station') }}
                     </x-nav-link>
                 </div>
@@ -31,11 +36,7 @@
                         {{ __('Members') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="url('constituency')" :active="Str::contains(request()->url(), 'constituency')">
-                        {{ __('Constituency') }}
-                    </x-nav-link>
-                </div>
+
 
             </div>
 
@@ -45,7 +46,7 @@
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            
+
                             <div class="">
                                 <img class=" {{ auth()->user()->photo ? 'block' : 'hidden' }}  inline-block h-10 w-10 rounded-full object-cover object-center"
                                     alt="Image placeholder" src="/storage/images/{{ auth()->user()->photo }}" />

@@ -92,11 +92,19 @@ class ConstitutionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
-            // dd($request->all());
+        $data = $request->validate([
+            'name' => 'required|string|unique:constituencies,name,' . $id,
+            'type' => ['required', 'in:A,P'],
+            'district_id' => 'required|exists:districts,id',
+        ]);
+
+        $constituency = Constituency::findOrFail($id);
+
+        $constituency->update($data);
+
+        return redirect()->route('constituency.index')->with('success', 'Constituency Updated');
 
     }
-
     /**
      * Remove the specified resource from storage.
      */
