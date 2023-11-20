@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Constituency;
+use App\Models\District;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ConstitutionController extends Controller
 {
@@ -11,16 +14,31 @@ class ConstitutionController extends Controller
      */
     public function index()
     {
-        return view('layouts.Constituency.constitution');
+
+        $districts = District::with('constituencies')->get();
+
+
+        return view('layouts.Constituency.constitution', compact('districts'));
+
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
+
     public function create()
     {
-        
-        return view('layouts.Constituency.create-constuency');
+
+        $districts = District::all();
+
+        if (!$districts) {
+
+            return response()->back()->with('error', 'No District Awailable!. Please Insert Your District First');
+
+        }
+
+        return view('layouts.Constituency.create-constuency', compact('districts'));
 
     }
 
@@ -29,15 +47,30 @@ class ConstitutionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|unique:constituencies,name',
+            'type' => ['required', 'in:A,P'],
+            'district_id' => 'required|exists:districts,id',
+        ]);
+
+        $district = District::findOrFail($data['district_id']);
+
+        $constituency = $district->constituencies()->create($data);
+
+        return redirect()->route('constituency.index')->with('success', 'Constituency Created');
     }
+
+
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+
+
+
     }
 
     /**
@@ -45,7 +78,13 @@ class ConstitutionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $constituency = Constituency::query()->findOrFail($id);
+
+        $districts = District::all();
+
+        return view('layouts.Constituency.edit-constituency', compact('districts', 'constituency'));
+
     }
 
     /**
@@ -53,7 +92,9 @@ class ConstitutionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
+            // dd($request->all());
+
     }
 
     /**
@@ -61,6 +102,12 @@ class ConstitutionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $constituency = Constituency::query()->findOrFail($id);
+
+        $constituency->delete();
+
+        return redirect()->back()->with('success', 'Constituency Deleted');
+
     }
 }

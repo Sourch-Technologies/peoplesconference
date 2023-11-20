@@ -3,11 +3,10 @@
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Create Constituency') }}
+                {{ __('Edit Constituency') }}
             </h2>
             <x-secondary-button>
                 <a href="{{ route('constituency.index') }}">
-
                     View Constituency
                 </a>
             </x-secondary-button>
@@ -27,8 +26,9 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('constituency.store') }}" method="POST">
+                    <form action="{{ route('constituency.update', [$constituency->id]) }}" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="grid md:grid-cols-2 gap-2">
                             <div class="relative z-0 w-full mb-6 group">
 
@@ -38,8 +38,8 @@
                                 <select id="countries" name="type"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option>Choose Constituency</option>
-                                    <option value="A">Assembly</option>
-                                    <option value="P">Parlimentary</option>
+                                    <option value="A"   {{ $constituency->type == "A" ? 'selected' : '' }} >Assembly</option>
+                                    <option value="P"  {{ $constituency->type == "P" ? 'selected' : '' }} >Parlimentary</option>
                                 </select>
 
 
@@ -58,7 +58,9 @@
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option>Choose District</option>
                                         @foreach ($districts as $district)
-                                            <option value="{{ $district->id }}">{{ $district->name }}</option>
+                                            <option value="{{ $district->id }}"
+                                                {{ $district->id === $constituency->district_id ? 'selected' : '' }}>
+                                                {{ $district->name }}</option>
                                         @endforeach
                                     </select>
                                 @else
@@ -84,7 +86,7 @@
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     Constituency Name:
                                 </label>
-                                <input type="text" id="default-input" name="name"
+                                <input type="text" id="default-input" name="name" value="{{ $district->name }}"
                                     class="bg-gray-50 border
                                      border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @error('name')

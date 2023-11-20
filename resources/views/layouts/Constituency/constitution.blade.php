@@ -8,11 +8,11 @@
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Districts') }}
+                {{ __('Constituencies') }}
             </h2>
             <x-secondary-button>
 
-                <a href="constituency/create">
+                <a href="{{ route('constituency.create') }}">
                     Create Constituency
                 </a>
 
@@ -21,18 +21,18 @@
 
     </x-slot>
 
-
     <div class="py-12">
         <div class=" mx-auto sm:px-4 ">
             <div class=" overflow-hidden  sm:rounded">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    @error('error')
+                    @if (session('error'))
                         <x-error>
                             <span class="font-medium">Error!:</span>
-                            {{ $message }}.
+                            {{ session('error') }}
                         </x-error>
-                    @enderror
+                    @endif
+
 
                     @if (session('success'))
                         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
@@ -42,25 +42,38 @@
                     @endif
 
 
-
                     <div class="flex justify-center ">
                         <div class="overflow-auto lg:overflow-visible  w-full p-5">
-                          
-                            
+
+                            @if ($districts && $districts->count() > 0)
+                                @foreach ($districts as $district)
+                                    <p class="text-red-500">Distrct: {{ $district->name }}</p>
+                                    @foreach ($district->constituencies as $constituencies)
+                                        <p>{{ $constituencies->name }}</p>
+                                        <a href="{{ route('constituency.edit', [$constituencies->id]) }}">Edit</a>
+
+                                        <form action="{{ route('constituency.destroy', [$constituencies->id]) }}"
+                                            method="POST" id="deleteForm">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    @endforeach
+                                @endforeach
+                            @else
+                                <h1 class="text-red-600 text-2xl">No Constituency! Please Add Constituency</h1>
+                            @endif
 
                         </div>
-                    
+
                     </div>
-               
-
-
 
                 </div>
             </div>
         </div>
     </div>
 
-
-
 </x-app-layout>
-<script src="{{ asset('JS/district.js') }}"></script>
+

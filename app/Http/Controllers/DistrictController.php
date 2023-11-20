@@ -14,9 +14,9 @@ class DistrictController extends Controller
     public function index()
     {
 
-        $districts = District::orderBy('name', 'ASC')->paginate(10);
+        $districts = District::withCount('constituencies')->paginate(10);
 
-
+      
 
         return view('district', compact('districts'));
     }
@@ -54,6 +54,7 @@ class DistrictController extends Controller
     {
 
         $district = District::find($id);
+
 
         if (!$district) {
 
