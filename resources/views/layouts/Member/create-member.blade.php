@@ -26,17 +26,11 @@
                         </div>
                     @endif
 
-
-
-                    is_Active
-
-                    constituency_id
-
                     <!-- component -->
                     <div class=" min-h-screen flex items-center justify-center bg-center items-center">
                         <div class=" bg-black opacity-60 inset-0 z-0"></div>
                         <div class=" w-full space-y-8">
-                            <form class="grid  gap-8 grid-cols-1">
+                            <form class="grid  gap-8 grid-cols-1" action="{{ route('member.create') }}" method="POST">
                                 <div class="flex flex-col ">
                                     <div class="flex flex-col sm:flex-row items-center">
                                         <h2 class="font-semibold text-lg mr-auto">Member Detail</h2>
@@ -63,41 +57,35 @@
                                             </div>
                                             <div class="md:flex flex-row md:space-x-4 w-full text-xs">
                                                 <div class="mb-3 space-y-2 w-full text-xs">
-                                                    <label class="font-semibold text-gray-600 py-2">Member Name <abbr
+                                                    <label class="font-semibold text-gray-600 py-2" name=''>Member Name <abbr
                                                             title="required">*</abbr></label>
                                                     <input placeholder="Company Name"
                                                         class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                                                      type="text" name="name"
-                                                        id="integration_shop_name">
+                                                        id="name">
                                                     <p class="text-red text-xs hidden">Please fill out this field.</p>
                                                 </div>
                                                 <div class="mb-3 space-y-2 w-full text-xs">
-                                                    <label class="font-semibold text-gray-600 py-2"> Email <abbr
+                                                    <label class="font-semibold text-gray-600 py-2" for="email"> Email <abbr
                                                             title="required">*</abbr></label>
                                                     <input placeholder="Email ID"
                                                         class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                                                         required="required" type="email" name="email"
-                                                        id="integration_shop_name">
+                                                        id="email">
                                                     <p class="text-red text-xs hidden">Please fill out this field.</p>
                                                 </div>
                                             </div>
 
                                             <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
-                                                <div class="w-full flex flex-col mb-3">
-                                                    <label class="font-semibold text-gray-600 py-2">Gender</label>
-                                                    <input placeholder="Address"
-                                                        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                        type="text" name="gender"
-                                                        id="integration_street_address">
-                                                </div>
+                                               
                                                 <div class="w-full flex flex-col mb-3">
                                                     <label class="font-semibold text-gray-600 py-2">Gender<abbr
                                                             title="required">*</abbr></label>
                                                     <select
                                                         class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
-                                                        required="required" name="integration[city_id]"
-                                                        id="integration_city_id">
-                                                        <option value="">Seleted location</option>
+                                                        required="required" name="gender"
+                                                        id="gender">
+                                                        <option value="">Gender</option>
                                                         <option value="M">Male</option>
                                                         <option value="F">Female</option>
                                                         <option value="O">Other</option>
@@ -110,18 +98,20 @@
 
                                                 <div class="w-full flex flex-col mb-3">
                                                     <label class="font-semibold text-gray-600 py-2"
-                                                    for="constituency_id">Constituency<abbr
+                                                    for="section_id">Section Name<abbr
                                                             title="required">*</abbr></label>
                                                     <select
                                                         class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
-                                                        required="required" name="constituency_id"
-                                                        id="constituency_id">
-                                                        <option value="">Select Constituency</option>
+                                                         name="section_id"
+                                                        id="section_id">
+                                                        <option value="">Select Section Name</option>
+                                                        <option value=""></option>
                                                     </select>
                                                     <p class="text-sm text-red-500 hidden mt-3" id="error">Please
                                                         fill out this field.</p>
                                                 </div>
                                             </div>
+
                                             <p class="text-xs text-red-500 text-right my-3">Required fields are marked
                                                 with an
                                                 asterisk <abbr title="Required field">*</abbr></p>

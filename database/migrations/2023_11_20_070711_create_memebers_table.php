@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('memebers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->unique();
+            $table->string('phone');
             $table->enum('gender', ['M','F','O']);
             $table->enum('is_Active', ['0','1'])->default('0');
             $table->string('photo');
-            $table->foreignId('constituency_id')->constrained('constituencies')->onDelete('cascade');
+            $table->foreignId('section_id')->constrained('section_names')->onDelete('cascade');
             $table->timestamps();
         });
     }

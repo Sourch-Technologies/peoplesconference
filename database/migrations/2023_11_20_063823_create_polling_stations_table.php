@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('polling_stations', function (Blueprint $table) {
             $table->id();
-            $table->integer('SNO');
-            $table->string('locality');
+            $table->bigInteger('SNO')->unique();
+            $table->string('locality')->unique();
             $table->string('building_location');
             $table->string('polling_area');
             $table->bigInteger('total_votes');
@@ -22,6 +22,8 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+
+ 
 
     /**
      * Reverse the migrations.

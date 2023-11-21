@@ -1,14 +1,14 @@
 <x-app-layout>
 
     <x-title>
-        Constituency
+        Constituen
     </x-title>
 
     <x-slot name="header">
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Constituencies') }}
+                {{ __('All District With Constituencies') }}
             </h2>
             <x-secondary-button>
 
@@ -43,31 +43,86 @@
 
 
                     <div class="flex justify-center ">
-                        <div class="overflow-auto lg:overflow-visible  w-full p-5">
+                        <div class="container mx-auto ">
+                            <div>
 
-                            @if ($districts && $districts->count() > 0)
-                                @foreach ($districts as $district)
-                                    <p class="text-red-500">Distrct: {{ $district->name }}</p>
-                                    @foreach ($district->constituencies as $constituencies)
-                                        <p>{{ $constituencies->name }}</p>
-                                        <a href="{{ route('constituency.edit', [$constituencies->id]) }}">Edit</a>
+                                <h1 class="text-xl">Assembly Constiuencies:</h1>
+                                @if ($districts)
+                                    @foreach ($districts as $district)
+                                        <div class="rounded overflow-hidden border border-gray-700 my-5">
+                                            <!-- accordion-tab  -->
+                                            <div class="group outline-none accordion-section" tabindex="1">
+                                                <div
+                                                    class="group bg-gray-900 flex justify-between px-4 py-3 items-center transition ease duration-500 cursor-pointer pr-10 relative">
+                                                    <div class="group-focus:text-white transition ease duration-500">
+                                                        District: {{ $district->name }}
+                                                    </div>
+                                                    <div
+                                                        class="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:text-white group-focus:-rotate-180 absolute top-0 right-0 mb-auto ml-auto mt-2 mr-2">
+                                                        <i class="fas fa-chevron-down"></i>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
+                                                    <!-- component -->
+                                                    <!-- This is an example component -->
+                                                    <div class="mx-auto">
 
-                                        <form action="{{ route('constituency.destroy', [$constituencies->id]) }}"
-                                            method="POST" id="deleteForm">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit">
-                                                Delete
-                                            </button>
-                                        </form>
+                                                        <div class="flex flex-col">
+                                                            <div class="overflow-x-auto">
+                                                                <div class="inline-block min-w-full align-middle">
+                                                                    <div class="overflow-hidden ">
+                                                                        <div
+                                                                            class="p-2 grid md:grid-cols-3 lg:grid-cols-5 gap-2">
+
+                                                                            @foreach ($district->constituencies as $constituency)
+                                                                                <div
+                                                                                    class="border border-gray-400 p-2 rounded text-center flex- flex-col items-center justify-center gap-2">
+
+                                                                                    <p>
+                                                                                        {{ $constituency->name }}
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        Polling Stations:
+
+                                                                                        {{ $constituency->polling_stations_count }}
+                                                                                    </p>
+                                                                                    <div class="flex items-center justify-around">
+                                                                                        <a
+                                                                                            href="{{ route('constituency.edit', [$constituency->id]) }}">Edit</a>
+                                                                                        <form
+                                                                                            action="{{ route('constituency.destroy', [$constituency->id]) }}"
+                                                                                            method="POST">
+                                                                                            @csrf
+                                                                                            @method('DELETE')
+                                                                                            <button
+                                                                                                type="submit">Delete</button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endforeach
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     @endforeach
-                                @endforeach
-                            @else
-                                <h1 class="text-red-600 text-2xl">No Constituency! Please Add Constituency</h1>
-                            @endif
+
+                                @endif
+
+                            </div>
+
+                            <div>
+                                <h1 class="text-xl">Parlimentary Constiuencies:</h1>
+                            </div>
 
                         </div>
-
                     </div>
 
                 </div>
@@ -76,4 +131,3 @@
     </div>
 
 </x-app-layout>
-

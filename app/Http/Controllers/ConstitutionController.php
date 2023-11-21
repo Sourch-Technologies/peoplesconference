@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Constituency;
 use App\Models\District;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class ConstitutionController extends Controller
@@ -15,7 +16,12 @@ class ConstitutionController extends Controller
     public function index()
     {
 
-        $districts = District::with('constituencies')->get();
+        $districts = District::with(['constituencies' => function ($q) {
+            $q->withCount('pollingStations');
+        }])->orderBy('name')->get();
+        
+
+        // dd($districts);
 
 
         return view('layouts.Constituency.constitution', compact('districts'));
@@ -55,7 +61,7 @@ class ConstitutionController extends Controller
 
         $district = District::findOrFail($data['district_id']);
 
-        $constituency = $district->constituencies()->create($data);
+        $district->constituencies()->create($data);
 
         return redirect()->route('constituency.index')->with('success', 'Constituency Created');
     }
@@ -80,6 +86,8 @@ class ConstitutionController extends Controller
     {
 
         $constituency = Constituency::query()->findOrFail($id);
+
+        // dd($constituency);
 
         $districts = District::all();
 
@@ -108,7 +116,7 @@ class ConstitutionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( $id)
     {
 
         $constituency = Constituency::query()->findOrFail($id);

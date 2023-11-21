@@ -52,20 +52,19 @@
                                         <div
                                             class="border border-gray-600 rounded p-3 hover:scale-105 duration-200 ease-in-out delay-75 hover:bg-gray-800 cursor-pointer space-y-3">
                                             <h1>{{ $district->name }}</h1>
-                                            <p>Constituency : {{ $district->constituencies_count }}</p>
+                                            <a href="{{ route('district.show', [$district->id]) }}">Constituency :
+                                                {{ $district->constituencies_count }}</a>
 
                                             <ul class="flex items-center justify-around">
 
                                                 <li>
-                                                    <a href="{{ route('district.show', [$district->id]) }}">
+                                                    <a href="{{ route('district.edit', [$district->id]) }}">
                                                         <i class="fa-regular fa-pen-to-square"></i>
                                                     </a>
                                                 </li>
 
                                                 <li>
-                                                    <form id="deleteForm"
-                                                        action=""
-                                                        method="POST">
+                                                    <form id="deleteForm" action="{{ route('district.destroy', [$district->id]) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit">
@@ -102,4 +101,3 @@
 
 
 </x-app-layout>
-

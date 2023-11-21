@@ -16,8 +16,6 @@ class DistrictController extends Controller
 
         $districts = District::withCount('constituencies')->paginate(10);
 
-      
-
         return view('district', compact('districts'));
     }
 
@@ -53,6 +51,17 @@ class DistrictController extends Controller
     public function show(string $id)
     {
 
+        $district = District::with('constituencies')->findOrFail($id);
+
+        return view('layouts.District.show_district_constituency', compact('district'));
+
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
         $district = District::find($id);
 
 
@@ -63,14 +72,6 @@ class DistrictController extends Controller
         }
 
         return view('edit-district', compact('district'));
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
 
 
     }
@@ -111,18 +112,18 @@ class DistrictController extends Controller
      */
     public function destroy($id)
     {
-        
+
         $district = District::finD($id);
 
         if (!$district) {
-            
+
             return redirect()->route('district.index')->withErrors(['error' => 'No District Found']);
-            
+
         }
 
         $district->delete();
 
         return redirect()->route('district.index')->with('success', 'District Deleted successfully');
-        
+
     }
 }

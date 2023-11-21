@@ -2,16 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePollingStationRequest;
+use App\Models\Constituency;
+use App\Models\District;
 use Illuminate\Http\Request;
 
 class PollingController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
+
+
     public function index()
     {
-        return view('layouts.PollingStation.pollingstation');
+
+        $districts = District::with('pollingStations')->get();
+
+        // dd($districts);
+
+        return view('layouts.PollingStation.pollingstation', compact('districts'));
+
     }
 
     /**
@@ -19,15 +31,25 @@ class PollingController extends Controller
      */
     public function create()
     {
-        //
+
+        $constituencies = Constituency::all();
+
+        return view('layouts.PollingStation.create-polling', compact('constituencies'));
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePollingStationRequest $request)
     {
-        //
+
+        $data = $request->validated();
+
+        Constituency::query()->findOrFail($data['constituency_id'])->pollingstations()->create($data);
+
+        return redirect()->route('pollingstation.index')->with('success', 'Polling Station Created');
+
     }
 
     /**
@@ -35,7 +57,9 @@ class PollingController extends Controller
      */
     public function show(string $id)
     {
-        //
+
+
+
     }
 
     /**

@@ -23,6 +23,13 @@ class Constituency extends Model
 
     }
 
+    public function pollingstations(): HasMany
+    {
+
+        return $this->hasMany(PollingStation::class);
+
+    }
+
     protected function Name(): Attribute
     {
         return Attribute::make(
@@ -30,5 +37,7 @@ class Constituency extends Model
             set: fn(string $value) => Str::title($value),
         );
     }
+
+
 
 }
