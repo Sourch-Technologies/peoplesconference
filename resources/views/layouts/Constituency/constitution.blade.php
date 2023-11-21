@@ -47,7 +47,7 @@
                             <div>
 
                                 <h1 class="text-xl">Assembly Constiuencies:</h1>
-                                @if ($districts)
+                                @if ($districts && $districts)
                                     @foreach ($districts as $district)
                                         <div class="rounded overflow-hidden border border-gray-700 my-5">
                                             <!-- accordion-tab  -->
@@ -74,20 +74,23 @@
                                                                     <div class="overflow-hidden ">
                                                                         <div
                                                                             class="p-2 grid md:grid-cols-3 lg:grid-cols-5 gap-2">
-
                                                                             @foreach ($district->constituencies as $constituency)
                                                                                 <div
                                                                                     class="border border-gray-400 p-2 rounded text-center flex- flex-col items-center justify-center gap-2">
 
                                                                                     <p>
-                                                                                        {{ $constituency->name }}
+                                                                                        <a
+                                                                                            href="{{ route('pollingstation.show', [$constituency->id]) }}">
+                                                                                            {{ $constituency->name }}
+                                                                                        </a>
                                                                                     </p>
                                                                                     <p>
                                                                                         Polling Stations:
 
                                                                                         {{ $constituency->polling_stations_count }}
                                                                                     </p>
-                                                                                    <div class="flex items-center justify-around">
+                                                                                    <div
+                                                                                        class="flex items-center justify-around">
                                                                                         <a
                                                                                             href="{{ route('constituency.edit', [$constituency->id]) }}">Edit</a>
                                                                                         <form

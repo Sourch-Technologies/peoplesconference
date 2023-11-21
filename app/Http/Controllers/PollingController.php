@@ -18,11 +18,11 @@ class PollingController extends Controller
     public function index()
     {
 
-        $districts = District::with('pollingStations')->get();
+        $constituencies = Constituency::with('pollingStations')->orderBy('name', 'ASC')->get();
 
-        // dd($districts);
+        // dd($constituencies);
 
-        return view('layouts.PollingStation.pollingstation', compact('districts'));
+        return view('layouts.PollingStation.pollingStation', compact('constituencies'));
 
     }
 
@@ -58,7 +58,11 @@ class PollingController extends Controller
     public function show(string $id)
     {
 
+        $constituencies = Constituency::with('pollingStations')->findOrFail($id);
 
+        // dd($constituencies);
+
+        return view('layouts.PollingStation.Constituency_pollingstation', compact('constituencies'));
 
     }
 
