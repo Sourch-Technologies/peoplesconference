@@ -15,9 +15,12 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src=" https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js "></script>
 
+   
     <link rel="shortcut icon" href="{{asset('WebImages/logo.ico')}}" type="image/x-icon">
 
     <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-871b95be.css') }}">
+    <script src="{{ asset('build/assets/app-21ee9d6e.js') }}"></script>
     <script src="{{ asset('custom.js') }}"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

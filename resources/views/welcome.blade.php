@@ -8,9 +8,12 @@
     <title>Laravel</title>
 
     
+   
     <link rel="shortcut icon" href="{{asset('WebImages/logo.ico')}}" type="image/x-icon">
 
     <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-871b95be.css') }}">
+    <script src="{{ asset('build/assets/app-21ee9d6e.js') }}"></script>
     <script src="{{ asset('custom.js') }}"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
  
