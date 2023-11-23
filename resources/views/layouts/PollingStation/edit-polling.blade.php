@@ -6,8 +6,8 @@
                 {{ __('Create Polling Station') }}
             </h2>
             <x-secondary-button>
-                <a href="{{ route('constituency.index') }}">
-                    View Polling Station
+                <a href="{{ route('pollingstation.index') }}">
+                    View Polling Station....
                 </a>
             </x-secondary-button>
         </div>
@@ -26,15 +26,16 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('pollingstation.store') }}" method="POST">
+                    <form action="{{ route('pollingstation.update', [$polling_station->id]) }}" method="POST">
 
                         @csrf
+                        @method('PUT')
 
                         <div class="mb-6">
                             <label for="SNO" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 SNO:
                             </label>
-                            <input type="number" id="SNO" name="SNO" value="{{ old('SNO') }}"
+                            <input type="number" id="SNO" name="SNO" value="{{ $polling_station->SNO }}"
                                 class="bg-gray-50 border
                                  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @error('SNO')
@@ -51,7 +52,7 @@
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     Locality:
                                 </label>
-                                <input type="text" id="locality" name="locality" value="{{ old('locality') }}"
+                                <input type="text" id="locality" name="locality" value="{{ $polling_station->locality }}"
                                     class="bg-gray-50 border
                                      border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @error('locality')
@@ -68,7 +69,7 @@
                                     Building Location:
                                 </label>
                                 <input type="text" id="building_location" name="building_location"
-                                    value="{{ old('building_location') }}"
+                                    value="{{ $polling_station->building_location }}"
                                     class="bg-gray-50 border
                                      border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @error('building_location')
@@ -85,7 +86,7 @@
                                     Polling Area:
                                 </label>
                                 <input type="text" id="polling_area" name="polling_area"
-                                    value="{{ old('polling_area') }}"
+                                    value="{{ $polling_station->polling_area }}"
                                     class="bg-gray-50 border
                                      border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @error('polling_area')
@@ -101,7 +102,7 @@
                                     Total Votes:
                                 </label>
                                 <input type="number" id="total_votes" name="total_votes"
-                                    value="{{ old('total_votes') }}"
+                                    value="{{ $polling_station->total_votes  }}"
                                     class="bg-gray-50 border
                                      border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @error('total_votes')
@@ -121,7 +122,7 @@
 
                                     <option value="">Select Constituency</option>
                                     @foreach ($constituencies as $constituency)
-                                        <option value="{{ $constituency->id }}">{{ $constituency->name }}</option>
+                                        <option value="{{ $constituency->id }}" {{ $constituency->id ===  $polling_station->constituency_id ? 'selected' : ''  }} >{{ $constituency->name }}</option>
                                     @endforeach
                                 @else
                                 @endif

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Constituency;
 use App\Models\District;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 
 class ConstitutionController extends Controller
 {
@@ -16,11 +14,13 @@ class ConstitutionController extends Controller
     public function index()
     {
 
-        $districts = District::with(['constituencies' => function ($q) {
+        $districts = District::select('name', 'id')->with(['constituencies' => function ($q) {
             $q->withCount('pollingStations');
         }])->orderBy('name')->get();
         
 
+        // $districts = District::select('name', 'id')->with('constituencies')->withCount('pollingStations')->orderBy('name')->get();
+        
         // dd($districts);
 
 
@@ -87,9 +87,7 @@ class ConstitutionController extends Controller
 
         $constituency = Constituency::query()->findOrFail($id);
 
-        // dd($constituency);
-
-        $districts = District::all();
+        $districts = District::query()->select('name', 'id')->orderBy('Name', 'ASC')->get();
 
         return view('layouts.Constituency.edit-constituency', compact('districts', 'constituency'));
 

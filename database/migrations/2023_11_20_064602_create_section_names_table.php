@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('section_names', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->foreignId('polling_station_id')->constrained('polling_stations')->onDelete('cascade');
             $table->timestamps();
         });

@@ -26,11 +26,14 @@
                         </div>
                     @endif
 
+
                     <!-- component -->
                     <div class=" min-h-screen flex items-center justify-center bg-center items-center">
                         <div class=" bg-black opacity-60 inset-0 z-0"></div>
                         <div class=" w-full space-y-8">
-                            <form class="grid  gap-8 grid-cols-1" action="{{ route('member.create') }}" method="POST">
+                            <form class="grid  gap-8 grid-cols-1" action="{{ route('member.store') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
                                 <div class="flex flex-col ">
                                     <div class="flex flex-col sm:flex-row items-center">
                                         <h2 class="font-semibold text-lg mr-auto">Member Detail</h2>
@@ -42,79 +45,100 @@
                                                 <div class="flex items-center py-6">
                                                     <div
                                                         class="w-12 h-12 mr-4 flex-none rounded-xl border overflow-hidden">
-                                                        <img class="w-12 h-12 mr-4 object-cover"
-                                                            src="https://images.unsplash.com/photo-1611867967135-0faab97d1530?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1352&amp;q=80"
-                                                            alt="Avatar Upload">
+                                                        @auth
+
+                                                            <img class="w-12 h-12 mr-4 object-cover" src=""
+                                                                alt="">
+                                                        @endauth
                                                     </div>
                                                     <label class="cursor-pointer ">
-                                                        <span
-                                                        id="photo"
+                                                        <span id="photo"
                                                             class="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-green-400 hover:bg-green-500 hover:shadow-lg">Browse</span>
-                                                        <input type="file" class="hidden"
-                                                            name="photo">
+                                                        <input type="file" class="hidden" name="photo">
                                                     </label>
+                                                    <p class="text-red-600">{{ $errors->first('photo') }}</p>
+
                                                 </div>
                                             </div>
+                                            {{-- '','','phone','','is_Active','photo','section_id' --}}
                                             <div class="md:flex flex-row md:space-x-4 w-full text-xs">
                                                 <div class="mb-3 space-y-2 w-full text-xs">
-                                                    <label class="font-semibold text-gray-600 py-2" name=''>Member Name <abbr
-                                                            title="required">*</abbr></label>
-                                                    <input placeholder="Company Name"
-                                                        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                     type="text" name="name"
-                                                        id="name">
-                                                    <p class="text-red text-xs hidden">Please fill out this field.</p>
+                                                    <label class="font-semibold  py-2" for="name">Member
+                                                        Name</label>
+                                                    <input placeholder="Member Name"
+                                                        class="bg-gray-50 border
+                                                        border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        type="text" name="name" id="name"
+                                                        value="{{ old('name') }}">
+                                                    <p class="text-red-600">{{ $errors->first('name') }}</p>
                                                 </div>
                                                 <div class="mb-3 space-y-2 w-full text-xs">
-                                                    <label class="font-semibold text-gray-600 py-2" for="email"> Email <abbr
-                                                            title="required">*</abbr></label>
+                                                    <label class="font-semibold  py-2" for="email">
+                                                        Email <abbr title="required"></label>
                                                     <input placeholder="Email ID"
-                                                        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                                        required="required" type="email" name="email"
-                                                        id="email">
-                                                    <p class="text-red text-xs hidden">Please fill out this field.</p>
+                                                        class="bg-gray-50 border
+                                                        border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        type="email" name="email" id="email"
+                                                        value="{{ old('email') }}">
+                                                    <p class="text-red-600">{{ $errors->first('email') }}</p>
+
                                                 </div>
                                             </div>
 
                                             <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
-                                               
+
                                                 <div class="w-full flex flex-col mb-3">
-                                                    <label class="font-semibold text-gray-600 py-2">Gender<abbr
-                                                            title="required">*</abbr></label>
+                                                    <label class="font-semibold  py-2" for="gender">Gender<abbr
+                                                            title="required"></label>
                                                     <select
-                                                        class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
-                                                        required="required" name="gender"
-                                                        id="gender">
+                                                        class="bg-gray-50 border
+                                                        border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+                                                        name="gender" id="gender">
                                                         <option value="">Gender</option>
                                                         <option value="M">Male</option>
                                                         <option value="F">Female</option>
                                                         <option value="O">Other</option>
                                                     </select>
-                                                    <p class="text-sm text-red-500 hidden mt-3" id="error">Please
-                                                        fill out this field.</p>
+                                                    <p class="text-red-600">{{ $errors->first('gender') }}</p>
+
                                                 </div>
+                                                <div class=" space-y-2 w-full text-xs pt-2">
+                                                    <label class="font-semibold  py-2" for="phone">
+                                                        Phone Number <abbr title="required"></label>
+                                                    <input placeholder="phone ID"
+                                                        class="bg-gray-50 border
+                                                        border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        type="number" name="phone" id="phone"
+                                                        value="{{ old('phone') }}">
+                                                    <p class="text-red-600">{{ $errors->first('phone') }}</p>
+
+                                                </div>
+
                                             </div>
                                             <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
 
                                                 <div class="w-full flex flex-col mb-3">
-                                                    <label class="font-semibold text-gray-600 py-2"
-                                                    for="section_id">Section Name<abbr
-                                                            title="required">*</abbr></label>
+                                                    <label class="font-semibold  py-2" for="section_name_id">Section
+                                                        Name<abbr title="required"></label>
                                                     <select
-                                                        class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
-                                                         name="section_id"
-                                                        id="section_id">
-                                                        <option value="">Select Section Name</option>
-                                                        <option value=""></option>
+                                                        class="bg-gray-50 border
+                                                        border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        name="section_name_id" id="section_name_id">
+                                                        <option value="">Select Section Names</option>
+                                                        @if ($sectionNames)
+                                                            @foreach ($sectionNames as $sectionName)
+                                                                <option value="{{ $sectionName->id }}">
+                                                                    {{ $sectionName->name }}</option>
+                                                            @endforeach
+                                                        @else
+                                                        @endif
                                                     </select>
-                                                    <p class="text-sm text-red-500 hidden mt-3" id="error">Please
-                                                        fill out this field.</p>
+                                                    <p class="text-red-600">{{ $errors->first('section_name_id') }}</p>
+
                                                 </div>
                                             </div>
 
-                                            <p class="text-xs text-red-500 text-right my-3">Required fields are marked
-                                                with an
-                                                asterisk <abbr title="Required field">*</abbr></p>
+
                                             <div class="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
                                                 <button type="submit"
                                                     class="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500">Save</button>
@@ -122,7 +146,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
 

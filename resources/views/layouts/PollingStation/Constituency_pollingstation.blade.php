@@ -3,7 +3,7 @@
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-               {{$constituencies->name}} {{ __('Constituency With Polling Stations') }}
+                {{ $constituency->name }} {{ __('Constituency With Polling Stations') }}
             </h2>
             <x-secondary-button>
                 <a href="{{ route('pollingstation.create') }}">
@@ -43,52 +43,62 @@
                                         </thead>
                                         <tbody>
 
-                                            @foreach ($constituencies->pollingStations as $pollingStation)
+                                            @foreach ($constituency->pollingStations as $pollingStation)
                                                 {{-- @foreach ($constituency->pollingStations as $pollingstation) --}}
-                                                    <tr class="border-b dark:border-neutral-500">
-                                                        <td class="whitespace-nowrap px-6 py-4 font-medium">
-                                                            {{ $pollingStation->SNO }}</td>
-                                                        <td class="whitespace-nowrap px-6 py-4">
-                                                            {{ $pollingStation->locality }}</td>
-                                                        <td class="whitespace-nowrap px-6 py-4">
-                                                            {{$pollingStation->building_location}}
-                                                        </td>
-                                                        <td class="whitespace-nowrap px-6 py-4">
-                                                            {{$pollingStation->polling_area}}
-                                                            
-                                                        </td>
-                                                        <td class="whitespace-nowrap px-6 py-4">
-                                                            {{$pollingStation->total_votes}}
-                                                        </td>
-                                                        <td class="whitespace-nowrap px-6 py-4">
-                                                            <ul>
-                                                                <li>
-                                                                    1.FAZUL AABAD
-                                                                </li>
-                                                                <li>
-                                                                    2. GANAIE MOHALLA
+                                                <tr class="border-b dark:border-neutral-500">
+                                                    <td class="whitespace-nowrap px-6 py-4 font-medium">
+                                                        {{ $pollingStation->SNO }}</td>
+                                                    <td class="whitespace-nowrap px-6 py-4">
+                                                        {{ $pollingStation->locality }}</td>
+                                                    <td class="whitespace-nowrap px-6 py-4">
+                                                        {{ $pollingStation->building_location }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-6 py-4">
+                                                        {{ $pollingStation->polling_area }}
 
-                                                                </li>
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-6 py-4">
+                                                        {{ $pollingStation->total_votes }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-6 py-4">
+                                                        <ul>
+                                                            @foreach ($pollingStation->sectionnames as $sectionname)
                                                                 <li>
-                                                                    3. HERPORA
+                                                                    {{ $sectionname->name }}
+                                                                </li>
+                                                            @endforeach
 
-                                                                </li>
-                                                                <li>
-                                                                    4. GUJARPATI
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                        <td>
-                                                            <ul>
-                                                                <li>1</li>
-                                                                <li>2</li>
-                                                                <li>3</li>
-                                                                <li>4</li>
-                                                            </ul>
-                                                        </td>
-                                                        <td class="whitespace-nowrap px-6 py-4">Edit</td>
-                                                        <td class="whitespace-nowrap px-6 py-4">Delete</td>
-                                                    </tr>
+                                                        </ul>
+                                                    </td>
+                                                    <td>
+                                                        <ul>
+                                                            <li>1</li>
+                                                            <li>2</li>
+                                                            <li>3</li>
+                                                            <li>4</li>
+                                                        </ul>
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-6 py-4">
+                                                        <a
+                                                            href="{{ route('pollingstation.edit', [$pollingStation->id]) }}">
+                                                            <i class="fa-solid fa-pen-to-square"></i>
+
+                                                        </a>
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-6 py-4">
+                                                        <form
+                                                            action="{{ route('pollingstation.destroy', [$pollingStation->id]) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit">
+
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+
+                                                        </form>
+                                                    </td>
+                                                </tr>
                                                 {{-- @endforeach --}}
                                             @endforeach
 

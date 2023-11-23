@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('memebers', function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone');
             $table->enum('gender', ['M','F','O']);
-            $table->enum('is_Active', ['0','1'])->default('0');
-            $table->string('photo');
-            $table->foreignId('section_id')->constrained('section_names')->onDelete('cascade');
+            $table->string('photo')->nullable();
+            $table->foreignId('section_name_id')->constrained('section_names')->onDelete('cascade');
             $table->timestamps();
         });
     }
-
+    
+    // $table->enum('is_Active', ['0','1'])->default('0');
    
 
     /**
