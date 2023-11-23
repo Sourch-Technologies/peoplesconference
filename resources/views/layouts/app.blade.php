@@ -15,16 +15,15 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src=" https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js "></script>
 
-    <link rel="shortcut icon" href="{{ asset('WebImages/logo.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('WebImages/logo.ico')}}" type="image/x-icon">
 
-    {{-- Js Chart End --}}
-    <!-- Scripts -->
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/style.css', 'resources/js/custom.js']) --}}
-
-    <link rel="stylesheet" href="{{ asset('build/assets/app-871b95be.css') }}">
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <script src="{{ asset('custom.js') }}"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-gray-100 dark:bg-gray-900">
+
     <div class="min-h-screen ">
 
         @include('layouts.navigation')

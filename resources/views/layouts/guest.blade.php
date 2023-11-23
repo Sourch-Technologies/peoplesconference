@@ -8,19 +8,11 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link rel="shortcut icon" href="{{ asset('WebImages/logo.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('WebImages/logo.ico')}}" type="image/x-icon">
 
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-
-    <link rel="stylesheet" href="{{ asset('build/assets/app-871b95be.css') }}">
-    
-
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/style.css', 'resources/js/custom.js'])
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <script src="{{ asset('custom.js') }}"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 
