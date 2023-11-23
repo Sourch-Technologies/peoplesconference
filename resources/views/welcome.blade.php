@@ -26,7 +26,7 @@
     <div class="absolute t-0 l-0 top-0 left-0 w-full flex flex-col items-center justify-center h-full ">
 
 
-        <h1 class="text-4xl text-white text-center">Welcome To Jammu And Kashmir <br> People's Party</h1>
+        <h1 class="text-4xl text-white text-center">Welcome To Jammu And Kashmir <br> People's  Conference</h1>
         @if (Route::has('login'))
             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                 @auth
