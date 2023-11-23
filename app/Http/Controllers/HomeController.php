@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Memeber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,8 +15,11 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
-       
-        return view('dashboard');
+        
+        $members = Memeber::query()->count();
+
+
+        return view('dashboard', compact('members'));
 
     }
 

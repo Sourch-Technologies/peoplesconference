@@ -56,7 +56,7 @@
                                                             class="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-green-400 hover:bg-green-500 hover:shadow-lg">Browse</span>
                                                         <input type="file" class="hidden" name="photo">
                                                     </label>
-                                                    <p class="text-red-600">{{ $errors->first('photo') }}</p>
+                                                    <p class="text-red-600">{{ $errors->first('photo') }}</p> 
 
                                                 </div>
                                             </div>
@@ -133,11 +133,11 @@
                                                         @else
                                                         @endif
                                                     </select>
-                                                    <p class="text-red-600">{{ $errors->first('section_name_id') }}</p>
+                                                    <p class="text-red-600">{{ $errors->first('section_name_id') }}
+                                                    </p>
 
                                                 </div>
                                             </div>
-
 
                                             <div class="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
                                                 <button type="submit"
@@ -149,9 +149,26 @@
                             </form>
                         </div>
 
-
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="my_camera"></div>
+                                <br/>
+                                <input type=button value="Take Snapshot" onClick="take_snapshot()">
+                                <input type="hidden" name="image" class="image-tag">
+                            </div>
+                            <div class="col-md-6">
+                                <div id="results">Your captured image will appear here...</div>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <span class="text-danger">{{ $errors->first('image') }}</span>
+                                <br/>
+                                <button class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 </x-app-layout>
+
+
