@@ -28,7 +28,7 @@
 
 
                     <!-- component -->
-                    <div class=" min-h-screen flex items-center justify-center bg-center items-center">
+                    <div class=" min-h-screen flex items-center justify-center bg-center">
                         <div class=" bg-black opacity-60 inset-0 z-0"></div>
                         <div class=" w-full space-y-8">
                             <form class="grid  gap-8 grid-cols-1" action="{{ route('member.store') }}" method="POST"
@@ -46,7 +46,6 @@
                                                     <div
                                                         class="w-12 h-12 mr-4 flex-none rounded-xl border overflow-hidden">
                                                         @auth
-
                                                             <img class="w-12 h-12 mr-4 object-cover" src=""
                                                                 alt="">
                                                         @endauth
@@ -147,23 +146,6 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div id="my_camera"></div>
-                                <br/>
-                                <input type=button value="Take Snapshot" onClick="take_snapshot()">
-                                <input type="hidden" name="image" class="image-tag">
-                            </div>
-                            <div class="col-md-6">
-                                <div id="results">Your captured image will appear here...</div>
-                            </div>
-                            <div class="col-md-12 text-center">
-                                <span class="text-danger">{{ $errors->first('image') }}</span>
-                                <br/>
-                                <button class="btn btn-success">Submit</button>
-                            </div>
                         </div>
                     </div>
                 </div>
