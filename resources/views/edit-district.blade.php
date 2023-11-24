@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <h2 class="font-semibold text-xl text-white leading-tight">
                 {{ __('Edit District') }}
             </h2>
             <x-secondary-button>
@@ -18,22 +18,21 @@
 
     <div class="py-12">
         <div class=" mx-auto sm:px-4 ">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden  sm:rounded">
+            <div class=" dark:bg-gray-800 overflow-hidden  sm:rounded">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form class="w-full mx-auto  max-w-3xl" action="{{ url('district', [$district->id]) }}" method="POST">
                         @csrf
                         @method("PUT")
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full ">
-                                <label class="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                                <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-300 text-xs font-bold mb-2"
                                     for="district">
                                     District Name
                                 </label>
                                 <input
-                                    class="appearance-none block w-full bg-gray-200
-                                     text-gray-700 border 
-                                     border-red-500 rounded py-3 
-                                     px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                    class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                    block w-full p-2.5 dark:bg-gray-700 
+                                    dark:border-gray-600 dark:placeholder-gray-700 dark:text-white"
                                     id="district" type="text" name="name" value="{{ $district->name }}">
 
                                 @error('name')

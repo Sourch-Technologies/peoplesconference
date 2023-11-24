@@ -16,15 +16,17 @@
     <script src="{{ asset('build/assets/app-21ee9d6e.js') }}"></script>
     <script src="{{ asset('custom.js') }}"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
- 
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css"  rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+  --}}
 
 
 </head>
 
-<body class="w-full h-screen ">
+<body class="bg-gray-900">
     <img class="w-full h-full object-cover blur-sm" src="{{ asset('WebImages/Kashmir.jpeg') }}">
    
-    <img class="absolute w-20 h-20 top-10 rounded-full  left-10" src="{{ asset('WhatsApp Image 2023-11-23 at 13.34.40.jpeg') }}" alt="">
+    <img class="absolute w-20 h-20 top-10 rounded-full  left-10" src="{{ asset('WebImages/logo.jpeg') }}" alt="">
 
 
     <div class="absolute t-0 l-0 top-0 left-0 w-full flex flex-col items-center justify-center h-full ">

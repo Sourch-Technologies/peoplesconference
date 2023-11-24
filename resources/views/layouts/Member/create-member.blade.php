@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <h2 class="font-semibold text-xl text-white leading-tight">
                 {{ __('Create Member') }}
             </h2>
             <x-secondary-button>
@@ -15,8 +15,8 @@
 
     <div class="py-12">
         <div class=" mx-auto sm:px-4 ">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden  sm:rounded">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+            <div class=" sm:rounded">
+                <div class="p-6 text-gray-700 dark:text-gray-300">
 
 
                     @if (session('success'))
@@ -31,8 +31,8 @@
                     <div class=" min-h-screen flex items-center justify-center bg-center">
                         <div class=" bg-black opacity-60 inset-0 z-0"></div>
                         <div class=" w-full space-y-8">
-                            <form class="grid  gap-8 grid-cols-1" action="{{ route('member.store') }}" method="POST"
-                                enctype="multipart/form-data">
+                            <form class="grid  gap-8 grid-cols-1 border p-4 rounded  border-gray-700"
+                                action="{{ route('member.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="flex flex-col ">
                                     <div class="flex flex-col sm:flex-row items-center">
@@ -55,18 +55,19 @@
                                                             class="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-green-400 hover:bg-green-500 hover:shadow-lg">Browse</span>
                                                         <input type="file" class="hidden" name="photo">
                                                     </label>
-                                                    <p class="text-red-600">{{ $errors->first('photo') }}</p> 
+                                                    <p class="text-red-600">{{ $errors->first('photo') }}</p>
 
                                                 </div>
                                             </div>
-                                         
+
                                             <div class="md:flex flex-row md:space-x-4 w-full text-xs">
                                                 <div class="mb-3 space-y-2 w-full text-xs">
                                                     <label class="font-semibold  py-2" for="name">Member
                                                         Name</label>
                                                     <input placeholder="Member Name"
-                                                        class="bg-gray-50 border
-                                                        border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                block w-full p-2.5 dark:bg-gray-700 
+                                dark:border-gray-600 dark:placeholder-gray-700 dark:text-white  "
                                                         type="text" name="name" id="name"
                                                         value="{{ old('name') }}">
                                                     <p class="text-red-600">{{ $errors->first('name') }}</p>
@@ -75,8 +76,9 @@
                                                     <label class="font-semibold  py-2" for="email">
                                                         Email <abbr title="required"></label>
                                                     <input placeholder="Email ID"
-                                                        class="bg-gray-50 border
-                                                        border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                block w-full p-2.5 dark:bg-gray-700 
+                                dark:border-gray-600 dark:placeholder-gray-700 dark:text-white  "
                                                         type="email" name="email" id="email"
                                                         value="{{ old('email') }}">
                                                     <p class="text-red-600">{{ $errors->first('email') }}</p>
@@ -90,8 +92,9 @@
                                                     <label class="font-semibold  py-2" for="gender">Gender<abbr
                                                             title="required"></label>
                                                     <select
-                                                        class="bg-gray-50 border
-                                                        border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+                                                        class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                block w-full p-2.5 dark:bg-gray-700 
+                                dark:border-gray-600 dark:placeholder-gray-700 dark:text-white   "
                                                         name="gender" id="gender">
                                                         <option value="">Gender</option>
                                                         <option value="M">Male</option>
@@ -105,8 +108,9 @@
                                                     <label class="font-semibold  py-2" for="phone">
                                                         Phone Number <abbr title="required"></label>
                                                     <input placeholder="phone ID"
-                                                        class="bg-gray-50 border
-                                                        border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                block w-full p-2.5 dark:bg-gray-700 
+                                dark:border-gray-600 dark:placeholder-gray-700 dark:text-white  "
                                                         type="number" name="phone" id="phone"
                                                         value="{{ old('phone') }}">
                                                     <p class="text-red-600">{{ $errors->first('phone') }}</p>
@@ -120,8 +124,9 @@
                                                     <label class="font-semibold  py-2" for="section_name_id">Section
                                                         Name<abbr title="required"></label>
                                                     <select
-                                                        class="bg-gray-50 border
-                                                        border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                block w-full p-2.5 dark:bg-gray-700 
+                                dark:border-gray-600 dark:placeholder-gray-700 dark:text-white  "
                                                         name="section_name_id" id="section_name_id">
                                                         <option value="">Select Section Names</option>
                                                         @if ($sectionNames)
@@ -152,5 +157,3 @@
             </div>
         </div>
 </x-app-layout>
-
-

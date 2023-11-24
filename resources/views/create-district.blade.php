@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <h2 class="font-semibold text-xl text-white leading-tight">
                 {{ __('Create District') }}
             </h2>
             <x-secondary-button>
@@ -18,21 +18,20 @@
 
     <div class="py-12">
         <div class=" mx-auto sm:px-4 ">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden  sm:rounded">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+            <div class=" overflow-hidden  sm:rounded">
+                <div class="p-6 ">
                     <form class="w-full mx-auto  max-w-3xl" action="{{ url('/district') }}" method="POST">
                         @csrf
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full ">
-                                
+
                                 <div>
-                                    <label for="district"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> District
+                                    <label for="district" class="block mb-2 text-sm font-medium text-white"> District
                                         Name</label>
                                     <input type="text" id="first_name"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
-                                        focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                        block w-full p-2.5 dark:bg-gray-700 
+                                        dark:border-gray-600 dark:placeholder-gray-700 dark:text-white "
                                         id="district" type="text" name="name" value="{{ old('name') }}">
 
                                     @error('name')

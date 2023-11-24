@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <h2 class="font-semibold text-xl text-white leading-tight">
                 {{ __('All Members') }}
             </h2>
             @can('is_admin')
@@ -20,12 +20,12 @@
     <div class="py-12">
         <div class=" mx-auto sm:px-4 ">
             <div class=" overflow-hidden  sm:rounded">
-                <div class=" text-gray-900 dark:text-gray-100">
+                <div class="  text-white">
 
                     @if (count($districts) > 0)
 
 
-                        <div class="container mx-auto dark:text-gray-100">
+                        <div class="container mx-auto text-white">
 
 
                             @if (session('success'))

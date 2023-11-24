@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-700 dark:text-gray-300">
                 {{ __('Create Constituency') }}
             </h2>
             <x-secondary-button>
@@ -16,7 +16,7 @@
 
     <div class="py-12">
         <div class=" mx-auto sm:px-4 ">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden  sm:rounded">
+            <div class=" text-white border p-4 rounded  border-gray-700  overflow-hidden  sm:rounded">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
 
@@ -33,10 +33,12 @@
                             <div class="relative z-0 w-full mb-6 group">
 
                                 <label for="countries"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
+                                    class="block mb-2 text-sm font-medium text-white">Select an
                                     option</label>
                                 <select id="countries" name="type"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                    block w-full p-2.5 dark:bg-gray-700 
+                                    dark:border-gray-600 dark:placeholder-gray-700 dark:text-white ">
                                     <option>Choose Constituency</option>
                                     <option value="A">Assembly</option>
                                     <option value="P">Parlimentary</option>
@@ -52,10 +54,12 @@
                             <div class="relative z-0 w-full mb-6 group">
                                 @if ($districts)
                                     <label for="countries"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
+                                        class="block mb-2 text-sm font-medium text-white">Select an
                                         option</label>
                                     <select id="countries" name="district_id"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                        block w-full p-2.5 dark:bg-gray-700 
+                                        dark:border-gray-600 dark:placeholder-gray-700 dark:text-white  ">
                                         <option>Choose District</option>
                                         @foreach ($districts as $district)
                                             <option value="{{ $district->id }}">{{ $district->name }}</option>
@@ -63,10 +67,12 @@
                                     </select>
                                 @else
                                     <label for="countries"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
+                                        class="block mb-2 text-sm font-medium text-white">Select an
                                         option</label>
                                     <select id="countries"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                        block w-full p-2.5 dark:bg-gray-700 
+                                        dark:border-gray-600 dark:placeholder-gray-700 dark:text-white  ">
                                         <option>Choose District</option>
                                     </select>
 
@@ -81,12 +87,13 @@
 
                             <div class="mb-6">
                                 <label for="default-input"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    class="block mb-2 text-sm font-medium text-white">
                                     Constituency Name:
                                 </label>
                                 <input type="text" id="default-input" name="name"
-                                    class="bg-gray-50 border
-                                     border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                    block w-full p-2.5 dark:bg-gray-700 
+                                    dark:border-gray-600 dark:placeholder-gray-700 dark:text-white  ">
                                 @error('name')
                                     <span class="text-red-500">{{ $errors->first('name') }}</span>
                                 @enderror

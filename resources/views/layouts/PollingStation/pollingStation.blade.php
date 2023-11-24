@@ -7,7 +7,7 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <h2 class="font-semibold text-xl text-white leading-tight">
                 {{ __('All Polling Stations With Constituencies') }}
             </h2>
             @can('is_admin')
@@ -43,7 +43,7 @@
                     @endif
 
 
-                    <div class="flex justify-center ">
+                    <div class="flex justify-center text-white">
                         <div class="container mx-auto ">
                             <div>
 

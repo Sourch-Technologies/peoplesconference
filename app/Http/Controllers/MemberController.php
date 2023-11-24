@@ -51,7 +51,7 @@ class MemberController extends Controller
             'email' => 'required|email|unique:members,email|max:255',
             'phone' => 'required|string|max:20',
             'gender' => 'required|in:M,F,O',
-            'photo' => 'mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
             'section_name_id' => 'required|exists:section_names,id',
 
         ]);
