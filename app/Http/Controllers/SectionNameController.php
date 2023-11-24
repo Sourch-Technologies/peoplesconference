@@ -35,6 +35,8 @@ class SectionNameController extends Controller
     public function store(Request $request)
     {
         
+        $this->authorize('is_admin');
+
         $data = $request->validate([
             'name' => 'required|string|unique:section_names,name,id',
             'polling_station_id' => 'required|exists:polling_stations,id'

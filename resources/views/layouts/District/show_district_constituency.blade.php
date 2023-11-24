@@ -29,9 +29,9 @@
                                     <table class="min-w-full text-left text-sm font-light">
                                         <thead class="border-b font-medium dark:border-neutral-500">
                                             <tr>
-                                               
+
                                                 <th scope="col" class="px-6 py-4">Constituency</th>
-                                                <th scope="col" class="px-6 py-4">Constituency Type</th>
+
 
                                             </tr>
                                         </thead>
@@ -39,12 +39,14 @@
                                             @if ($district)
                                                 @foreach ($district->constituencies as $constituency)
                                                     <tr class="border-b dark:border-neutral-500">
-                                                      
+
 
                                                         <td class="whitespace-nowrap px-6 py-4">
-                                                            {{ $constituency->name }}
+                                                            <a href="">
+                                                                {{ $constituency->name }}
+                                                            </a>
                                                         </td>
-                                                       
+
                                                     </tr>
                                                 @endforeach
                                             @else

@@ -10,13 +10,14 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('All Polling Stations With Constituencies') }}
             </h2>
-            <x-secondary-button>
+            @can('is_admin')
+                <x-secondary-button>
+                    <a href="{{ route('pollingstation.create') }}">
+                        Create Polling Station
+                    </a>
 
-                <a href="{{ route('pollingstation.create') }}">
-                    Create Polling Station
-                </a>
-
-            </x-secondary-button>
+                </x-secondary-button>
+            @endcan
         </div>
 
     </x-slot>
@@ -101,12 +102,14 @@
                                                                                         <th scope="col"
                                                                                             class="px-6 py-4">
                                                                                             Active Members</th>
-                                                                                        <th scope="col"
-                                                                                            class="px-6 py-4">
-                                                                                            Edit</th>
-                                                                                        <th scope="col"
-                                                                                            class="px-6 py-4">
-                                                                                            Delete</th>
+                                                                                        @can('is_admin')
+                                                                                            <th scope="col"
+                                                                                                class="px-6 py-4">
+                                                                                                Edit</th>
+                                                                                            <th scope="col"
+                                                                                                class="px-6 py-4">
+                                                                                                Delete</th>
+                                                                                        @endcan
 
                                                                                     </tr>
                                                                                 </thead>
@@ -149,37 +152,42 @@
                                                                                             </td>
                                                                                             <td>
                                                                                                 <ul>
-                                                                                                    <li>1</li>
-                                                                                                    <li>2</li>
-                                                                                                    <li>3</li>
-                                                                                                    <li>4</li>
+                                                                                                    @foreach ($pollingStation->sectionnames as $sectionname)
+                                                                                                        <li>
+                                                                                                            {{ $sectionname->members_count }}
+
+                                                                                                        </li>
+                                                                                                    @endforeach
+
                                                                                                 </ul>
                                                                                             </td>
-                                                                                            <td
-                                                                                                class="whitespace-nowrap px-6 py-4">
-                                                                                                <a
-                                                                                                    href="{{ route('pollingstation.edit', [$pollingStation->id]) }}">
-                                                                                                    <i
-                                                                                                        class="fa-solid fa-pen-to-square"></i>
-
-                                                                                                </a>
-                                                                                            </td>
-                                                                                            <td
-                                                                                                class="whitespace-nowrap px-6 py-4">
-                                                                                                <form
-                                                                                                    action="{{ route('pollingstation.destroy', [$pollingStation->id]) }}"
-                                                                                                    method="POST">
-                                                                                                    @csrf
-                                                                                                    @method('DELETE')
-                                                                                                    <button
-                                                                                                        type="submit">
-
+                                                                                            @can('is_admin')
+                                                                                                <td
+                                                                                                    class="whitespace-nowrap px-6 py-4">
+                                                                                                    <a
+                                                                                                        href="{{ route('pollingstation.edit', [$pollingStation->id]) }}">
                                                                                                         <i
-                                                                                                            class="fa-solid fa-trash"></i>
-                                                                                                    </button>
+                                                                                                            class="fa-solid fa-pen-to-square"></i>
 
+                                                                                                    </a>
+                                                                                                </td>
+                                                                                                <td
+                                                                                                    class="whitespace-nowrap px-6 py-4">
+                                                                                                    <form
+                                                                                                        action="{{ route('pollingstation.destroy', [$pollingStation->id]) }}"
+                                                                                                        method="POST">
+                                                                                                        @csrf
+                                                                                                        @method('DELETE')
+                                                                                                        <button
+                                                                                                            type="submit">
+
+                                                                                                            <i
+                                                                                                                class="fa-solid fa-trash"></i>
+                                                                                                        </button>
+
+                                                                                                </td>
                                                                                                 </form>
-                                                                                            </td>
+                                                                                            @endcan
                                                                                         </tr>
                                                                                     @endforeach
 

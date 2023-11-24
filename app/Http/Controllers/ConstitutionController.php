@@ -36,6 +36,8 @@ class ConstitutionController extends Controller
     public function create()
     {
 
+        $this->authorize('is_admin');
+
         $districts = District::all();
 
         if (!$districts) {
@@ -53,6 +55,9 @@ class ConstitutionController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->authorize('is_admin');
+
         $data = $request->validate([
             'name' => 'required|string|unique:constituencies,name',
             'type' => ['required', 'in:A,P'],
@@ -85,6 +90,8 @@ class ConstitutionController extends Controller
     public function edit(string $id)
     {
 
+        $this->authorize('is_admin');
+
         $constituency = Constituency::query()->findOrFail($id);
 
         $districts = District::query()->select('name', 'id')->orderBy('Name', 'ASC')->get();
@@ -98,6 +105,9 @@ class ConstitutionController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $this->authorize('is_admin');
+
         $data = $request->validate([
             'name' => 'required|string|unique:constituencies,name,' . $id,
             'type' => ['required', 'in:A,P'],
@@ -116,6 +126,8 @@ class ConstitutionController extends Controller
      */
     public function destroy( $id)
     {
+
+        $this->authorize('is_admin');
 
         $constituency = Constituency::query()->findOrFail($id);
 

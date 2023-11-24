@@ -5,12 +5,13 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('All Members') }}
             </h2>
-            <x-secondary-button>
-
-                <a href="{{ route('member.create') }}">
-                    Create Member
-                </a>
-            </x-secondary-button>
+            @can('is_admin')
+                <x-secondary-button>
+                    <a href="{{ route('member.create') }}">
+                        Create Member
+                    </a>
+                </x-secondary-button>
+            @endcan
         </div>
     </x-slot>
 
@@ -21,7 +22,7 @@
             <div class=" overflow-hidden  sm:rounded">
                 <div class=" text-gray-900 dark:text-gray-100">
 
-                    @if ($districts)
+                    @if (count($districts) > 0)
 
 
                         <div class="container mx-auto dark:text-gray-100">
@@ -58,12 +59,14 @@
                                             <th class="p-3">Polling Station</th>
                                             <th class="p-3">Constituency</th>
                                             <th class="p-3">District</th>
-                                            <th class="p-3">
-                                                Edit
-                                            </th>
-                                            <th>
-                                                Delete
-                                            </th>
+                                            @can('is_admin')
+                                                <th class="p-3">
+                                                    Edit
+                                                </th>
+                                                <th>
+                                                    Delete
+                                                </th>
+                                            @endcan
                                         </tr>
                                     </thead>
 
@@ -131,25 +134,25 @@
                                                                     </p>
 
                                                                 </td>
-
-                                                                <td>
-                                                                    <a
-                                                                        href="{{ route('member.edit', [$member->id]) }}">
-                                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                                    </a>
-                                                                </td>
-                                                                <td>
-                                                                    <form
-                                                                        action="{{ route('member.destroy', [$member->id]) }}"
-                                                                        method="POST">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <button type="submit">
-                                                                            <i class="fa fa-trash"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                </td>
-
+                                                                @can('is_admin')
+                                                                    <td>
+                                                                        <a
+                                                                            href="{{ route('member.edit', [$member->id]) }}">
+                                                                            <i class="fa-solid fa-pen-to-square"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form
+                                                                            action="{{ route('member.destroy', [$member->id]) }}"
+                                                                            method="POST">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit">
+                                                                                <i class="fa fa-trash"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </td>
+                                                                @endcan
                                                             </tr>
 
                                                         </tbody>
@@ -166,6 +169,7 @@
                             </div>
                         </div>
                     @else
+                        <h1 class="text-5xl text-center">No Members Awailable</h1>
                     @endif
 
                 </div>

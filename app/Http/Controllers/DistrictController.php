@@ -24,6 +24,8 @@ class DistrictController extends Controller
      */
     public function create()
     {
+        $this->authorize('is_admin');
+
         return view('create-district');
     }
 
@@ -33,6 +35,7 @@ class DistrictController extends Controller
     public function store(StoreDistrictRequest $request)
     {
 
+        $this->authorize('is_admin');
 
         $data = $request->validated();
 
@@ -51,6 +54,7 @@ class DistrictController extends Controller
     public function show(string $id)
     {
 
+
         $district = District::with('constituencies')->findOrFail($id);
 
         return view('layouts.District.show_district_constituency', compact('district'));
@@ -62,6 +66,11 @@ class DistrictController extends Controller
      */
     public function edit($id)
     {
+
+
+        $this->authorize('is_admin');
+        
+
         $district = District::find($id);
 
 
@@ -81,6 +90,9 @@ class DistrictController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+
+        $this->authorize('is_admin');
 
 
         $data = $request->validate([
@@ -113,7 +125,9 @@ class DistrictController extends Controller
     public function destroy($id)
     {
 
-        $district = District::finD($id);
+        $this->authorize('is_admin');
+
+        $district = District::find($id);
 
         if (!$district) {
 

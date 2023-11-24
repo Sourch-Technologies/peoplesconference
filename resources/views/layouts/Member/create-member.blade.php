@@ -59,7 +59,7 @@
 
                                                 </div>
                                             </div>
-                                            {{-- '','','phone','','is_Active','photo','section_id' --}}
+                                         
                                             <div class="md:flex flex-row md:space-x-4 w-full text-xs">
                                                 <div class="mb-3 space-y-2 w-full text-xs">
                                                     <label class="font-semibold  py-2" for="name">Member

@@ -29,6 +29,8 @@ class MemberController extends Controller
     public function create()
     {
 
+        $this->authorize('is_admin');
+
         $sectionNames = SectionName::select('name', 'id')->get();
 
         return view('layouts.Member.create-member', compact('sectionNames'));
@@ -40,6 +42,8 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->authorize('is_admin');
 
         $validatedData = $request->validate([
 
@@ -93,6 +97,8 @@ class MemberController extends Controller
      */
     public function edit(string $id)
     {
+     
+        $this->authorize('is_admin');
         
         $member = Memeber::query()->findOrFail($id);
 
@@ -108,6 +114,8 @@ class MemberController extends Controller
     public function update(Request $request, $id)
     {
     
+        $this->authorize('is_admin');
+
         $member = Memeber::findOrFail($id);
 
         $request->validate([
@@ -144,6 +152,8 @@ class MemberController extends Controller
      */
     public function destroy(string $id)
     {
+
+        $this->authorize('is_admin');
 
         $member = Memeber::query()->findOrFail($id);
 

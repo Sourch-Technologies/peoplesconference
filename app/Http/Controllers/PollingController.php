@@ -25,11 +25,17 @@ class PollingController extends Controller
             ->with([
                 'pollingStations' => function ($q) {
                     $q->select('id', 'SNO', 'locality', 'building_location', 'polling_area', 'total_votes', 'constituency_id')
-                        ->with('sectionnames');
+                        ->with([
+                            'sectionnames' => function ($s) {
+                                return $s->withCount('members');
+                            }
+                        ]);
                 }
             ])
             ->orderBy('name', 'ASC')
             ->get();
+
+        // dd($constituencies);
 
         return view('layouts.PollingStation.pollingStation', compact('constituencies'));
 
@@ -40,6 +46,8 @@ class PollingController extends Controller
      */
     public function create()
     {
+
+        $this->authorize('is_admin');
 
         $constituencies = Constituency::all();
 
@@ -52,6 +60,8 @@ class PollingController extends Controller
      */
     public function store(StorePollingStationRequest $request)
     {
+
+        $this->authorize('is_admin');
 
         $data = $request->validated();
 
@@ -79,7 +89,7 @@ class PollingController extends Controller
             ])
             ->where('id', $id)
             ->first();
-        
+
 
         return view('layouts.PollingStation.Constituency_pollingstation', compact('constituency'));
 
@@ -90,6 +100,8 @@ class PollingController extends Controller
      */
     public function edit($id)
     {
+
+        $this->authorize('is_admin');
 
         $polling_station = PollingStation::query()->findOrFail($id);
 
@@ -105,7 +117,7 @@ class PollingController extends Controller
     public function update(Request $request, string $id)
     {
 
-
+        $this->authorize('is_admin');
 
         $data = $request->validate([
 
@@ -137,6 +149,8 @@ class PollingController extends Controller
      */
     public function destroy($id)
     {
+
+        $this->authorize('is_admin');
 
         $pollingstation = PollingStation::findOrfail($id);
 

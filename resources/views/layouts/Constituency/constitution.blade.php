@@ -10,13 +10,16 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('All District With Constituencies') }}
             </h2>
-            <x-secondary-button>
 
-                <a href="{{ route('constituency.create') }}">
-                    Create Constituency
-                </a>
+            @can('is_admin')
+                <x-secondary-button>
 
-            </x-secondary-button>
+                    <a href="{{ route('constituency.create') }}">
+                        Create Constituency
+                    </a>
+
+                </x-secondary-button>
+            @endcan
         </div>
 
     </x-slot>
@@ -89,19 +92,21 @@
 
                                                                                         {{ $constituency->polling_stations_count }}
                                                                                     </p>
-                                                                                    <div
-                                                                                        class="flex items-center justify-around">
-                                                                                        <a
-                                                                                            href="{{ route('constituency.edit', [$constituency->id]) }}">Edit</a>
-                                                                                        <form
-                                                                                            action="{{ route('constituency.destroy', [$constituency->id]) }}"
-                                                                                            method="POST">
-                                                                                            @csrf
-                                                                                            @method('DELETE')
-                                                                                            <button
-                                                                                                type="submit">Delete</button>
-                                                                                        </form>
-                                                                                    </div>
+                                                                                    @can('is_admin')
+                                                                                        <div
+                                                                                            class="flex items-center justify-around">
+                                                                                            <a
+                                                                                                href="{{ route('constituency.edit', [$constituency->id]) }}">Edit</a>
+                                                                                            <form
+                                                                                                action="{{ route('constituency.destroy', [$constituency->id]) }}"
+                                                                                                method="POST">
+                                                                                                @csrf
+                                                                                                @method('DELETE')
+                                                                                                <button
+                                                                                                    type="submit">Delete</button>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    @endcan
                                                                                 </div>
                                                                             @endforeach
 

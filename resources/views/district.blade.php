@@ -10,13 +10,17 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Districts') }}
             </h2>
-            <x-secondary-button>
+            @can('is_admin')
+                <x-secondary-button>
 
-                <a href="district/create">
-                    Create District
-                </a>
+                    <a href="district/create">
+                        Create District
+                    </a>
 
-            </x-secondary-button>
+                </x-secondary-button>
+            @endcan
+
+
         </div>
 
     </x-slot>
@@ -55,24 +59,30 @@
                                             <a href="{{ route('district.show', [$district->id]) }}">Constituency :
                                                 {{ $district->constituencies_count }}</a>
 
-                                            <ul class="flex items-center justify-around">
+                                            @can('is_admin')
+                                                <ul class="flex items-center justify-around">
 
-                                                <li>
-                                                    <a href="{{ route('district.edit', [$district->id]) }}">
-                                                        <i class="fa-regular fa-pen-to-square"></i>
-                                                    </a>
-                                                </li>
+                                                    <li>
+                                                        <a href="{{ route('district.edit', [$district->id]) }}">
+                                                            <i class="fa-regular fa-pen-to-square"></i>
+                                                    
+                                                        </a>
+                                                    </li>
 
-                                                <li>
-                                                    <form id="deleteForm" action="{{ route('district.destroy', [$district->id]) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                </li>
-                                            </ul>
+                                                    <li>
+                                                        <form id="deleteForm"
+                                                            action="{{ route('district.destroy', [$district->id]) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            @endcan
+
 
                                         </div>
                                     @endforeach
