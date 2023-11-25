@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <h2 class="font-semibold text-xl text-white leading-tight">
                 {{ __('Edit Constituency') }}
             </h2>
             <x-secondary-button>
@@ -15,7 +15,7 @@
 
     <div class="py-12">
         <div class=" mx-auto sm:px-4 ">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden  sm:rounded">
+            <div class="overflow-hidden  sm:rounded">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
 
@@ -36,7 +36,9 @@
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
                                     option</label>
                                 <select id="countries" name="type"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                    block w-full p-2.5 dark:bg-gray-700 
+                                    dark:border-gray-600 dark:placeholder-gray-700 dark:text-white">
                                     <option>Choose Constituency</option>
                                     <option value="A"   {{ $constituency->type == "A" ? 'selected' : '' }} >Assembly</option>
                                     <option value="P"  {{ $constituency->type == "P" ? 'selected' : '' }} >Parlimentary</option>
@@ -55,7 +57,9 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
                                         option</label>
                                     <select id="countries" name="district_id"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                        block w-full p-2.5 dark:bg-gray-700 
+                                        dark:border-gray-600 dark:placeholder-gray-700 dark:text-white">
                                         <option>Choose District</option>
                                         @foreach ($districts as $district)
                                             <option value="{{ $district->id }}"
@@ -68,7 +72,9 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
                                         option</label>
                                     <select id="countries"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                        block w-full p-2.5 dark:bg-gray-700 
+                                        dark:border-gray-600 dark:placeholder-gray-700 dark:text-white">
                                         <option>Choose District</option>
                                     </select>
 
@@ -87,8 +93,9 @@
                                     Constituency Name:
                                 </label>
                                 <input type="text" id="default-input" name="name" value="{{ $constituency->name }}"
-                                    class="bg-gray-50 border
-                                     border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
+                                    block w-full p-2.5 dark:bg-gray-700 
+                                    dark:border-gray-600 dark:placeholder-gray-700 dark:text-white">
                                 @error('name')
                                     <span class="text-red-500">{{ $errors->first('name') }}</span>
                                 @enderror

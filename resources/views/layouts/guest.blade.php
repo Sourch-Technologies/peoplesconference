@@ -8,7 +8,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link rel="shortcut icon" href="{{asset('WebImages/logo.ico')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('WebImages/logo.ico') }}" type="image/x-icon">
 
     <link rel="stylesheet" href="{{ asset('style.css') }}">
     <link rel="stylesheet" href="{{ asset('build/assets/app-871b95be.css') }}">
@@ -28,8 +28,7 @@
             </a>
         </div>
 
-        <div
-            class="w-full sm:max-w-md mt-6 px-6 py-4 border border-gray-600  shadow-md overflow-hidden sm:rounded-lg">
+        <div class="w-full sm:max-w-md mt-6 px-6 py-4 border border-gray-600  shadow-md overflow-hidden sm:rounded-lg">
             {{ $slot }}
         </div>
     </div>

@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <h2 class="font-semibold text-xl text-white leading-tight">
                 {{ $constituency->name }} {{ __('Constituency With Polling Stations') }}
             </h2>
             <x-secondary-button>
@@ -18,8 +18,8 @@
 
     <div class="py-12">
         <div class=" mx-auto sm:px-4 ">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden  sm:rounded">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+            <div class="text-white dark:bg-gray-800 overflow-hidden  sm:rounded">
+                <div class="p-6 ">
 
 
                     <div class="flex flex-col overflow-x-auto">

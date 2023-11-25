@@ -7,7 +7,7 @@
             </h2>
             <x-secondary-button>
                 <a href="{{ route('constituency.index') }}">
-                    View Station
+                    View Polling Station
                 </a>
             </x-secondary-button>
         </div>

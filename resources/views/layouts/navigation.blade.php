@@ -55,12 +55,11 @@
                             <div class="">
                                 @auth
                                     @if (optional(auth()->user())->photo)
-                                        <img class="block inline-block h-10 w-10 rounded-full object-cover object-center"
+                                        <img class=" h-10 w-10 rounded-full object-cover object-center"
                                             alt="Image placeholder" src="/storage/images/{{ auth()->user()->photo }}" />
                                     @else
                                         <!-- Show a placeholder image or default avatar -->
-                                        <img class="block inline-block h-10 w-10 rounded-full object-cover object-center"
-                                            alt="Default Image" src="/path/to/default/image.jpg" />
+                                        Profile
                                     @endif
                                 @endauth
                             </div>
