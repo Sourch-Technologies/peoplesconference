@@ -12,9 +12,10 @@
     <link rel="shortcut icon" href="{{asset('WebImages/logo.ico')}}" type="image/x-icon">
 
     <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <script src="{{ asset('custom.js') }}"></script> --}}
+    {{--
     <link rel="stylesheet" href="{{ asset('build/assets/app-871b95be.css') }}">
     <script src="{{ asset('build/assets/app-21ee9d6e.js') }}"></script>
-    <script src="{{ asset('custom.js') }}"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css"  rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
