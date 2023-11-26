@@ -3,7 +3,7 @@
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
             <h2 class="font-semibold text-xl text-white leading-tight">
-                {{ __('Create Polling Station') }}
+                {{ __('Edit Polling Station') }}
             </h2>
             <x-secondary-button>
                 <a href="{{ route('pollingstation.index') }}">
@@ -13,10 +13,10 @@
         </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class=" mx-auto sm:px-4 ">
+    <div class="py-12 p-4">
+        <div class=" mx-auto ">
             <div class=" dark:bg-gray-800 overflow-hidden  sm:rounded">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class=" text-white">
 
 
                     @if (session('success'))
@@ -32,7 +32,7 @@
                         @method('PUT')
 
                         <div class="mb-6">
-                            <label for="SNO" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <label for="SNO" class="block mb-2 text-sm font-medium">
                                 SNO:
                             </label>
                             <input type="number" id="SNO" name="SNO" value="{{ $polling_station->SNO }}"
@@ -50,7 +50,7 @@
                         <div class="grid md:grid-cols-2 gap-2">
                             <div class="mb-6">
                                 <label for="locality"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    class="block mb-2 text-sm font-medium">
                                     Locality:
                                 </label>
                                 <input type="text" id="locality" name="locality" value="{{ $polling_station->locality }}"
@@ -67,7 +67,7 @@
 
                             <div class="mb-6">
                                 <label for="building_location"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    class="block mb-2 text-sm font-medium">
                                     Building Location:
                                 </label>
                                 <input type="text" id="building_location" name="building_location"
@@ -85,7 +85,7 @@
 
                             <div class="mb-6">
                                 <label for="polling_area"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    class="block mb-2 text-sm font-medium">
                                     Polling Area:
                                 </label>
                                 <input type="text" id="polling_area" name="polling_area"
@@ -102,7 +102,7 @@
 
                             <div class="mb-6">
                                 <label for="total_votes"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    class="block mb-2 text-sm font-medium">
                                     Total Votes:
                                 </label>
                                 <input type="number" id="total_votes" name="total_votes"

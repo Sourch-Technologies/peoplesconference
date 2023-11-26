@@ -13,10 +13,10 @@
         </div>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 p-4">
         <div class=" mx-auto sm:px-4 ">
             <div class=" sm:rounded">
-                <div class="p-6 text-gray-700 dark:text-gray-300">
+                <div class=" text-gray-700 dark:text-gray-300">
 
 
                     @if (session('success'))
@@ -28,7 +28,7 @@
 
 
                     <!-- component -->
-                    <div class=" min-h-screen flex items-center justify-center bg-center">
+                    <div class=" min-h-screen flex items-center justify-center bg-center text-white">
                         <div class=" bg-black opacity-60 inset-0 z-0"></div>
                         <div class=" w-full space-y-8">
                             <form class="grid  gap-8 grid-cols-1 border p-4 rounded  border-gray-700"

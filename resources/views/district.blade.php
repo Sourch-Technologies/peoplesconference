@@ -26,10 +26,10 @@
     </x-slot>
 
 
-    <div class="py-12">
+    <div class="py-12 p-4">
         <div class=" mx-auto sm:px-4 ">
             <div class=" overflow-hidden  sm:rounded">
-                <div class="p-6 text-white">
+                <div class=" text-white">
 
                     @error('error')
                         <x-error>
@@ -48,7 +48,7 @@
 
 
                     <div class="flex justify-center ">
-                        <div class="overflow-auto lg:overflow-visible  w-full p-5">
+                        <div class="overflow-auto lg:overflow-visible  w-full">
                             @if ($districts)
 
                                 <div class="grid md:grid-cols-4 gap-3 text-center">

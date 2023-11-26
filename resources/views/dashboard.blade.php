@@ -16,7 +16,7 @@
         <div class=" mx-auto sm:px-4 ">
             <div class=" overflow-hidden  sm:rounded">
                 
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
+                <div class="grid md:grid-cols-3 px-2  gap-4 w-full">
 
                     <div>
                         <img class="h-96 w-full rounded-lg" src="{{ asset('WebImages/Sajad Lone.jpeg') }}"

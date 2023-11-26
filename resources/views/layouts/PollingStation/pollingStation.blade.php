@@ -22,10 +22,10 @@
 
     </x-slot>
 
-    <div class="py-12">
-        <div class=" mx-auto sm:px-4 ">
+    <div class="py-12 px-4">
+        <div class=" mx-auto  ">
             <div class=" overflow-hidden  sm:rounded">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class=" text-gray-900 dark:text-gray-100">
 
                     @if (session('error'))
                         <x-error>

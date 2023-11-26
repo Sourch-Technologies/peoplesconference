@@ -20,10 +20,10 @@
         </div>
     @endif
 
-    <div class="py-12">
-        <div class=" mx-auto sm:px-4 ">
+    <div class="py-12 px-4">
+        <div class=" mx-auto">
             <div class=" dark:bg-gray-800 overflow-hidden  sm:rounded">
-                <div class="p-6 text-gray-700 dark:text-gray-300">
+                <div class=" text-gray-700 dark:text-gray-300">
 
 
 

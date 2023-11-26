@@ -13,25 +13,26 @@
         </div>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 p-4">
         <div class=" mx-auto sm:px-4 ">
-            <div class="border p-4 rounded  border-gray-700 overflow-hidden  sm:rounded">
+            <div class="border p-4 rounded border-gray-500  overflow-hidden  sm:rounded">
                 <div class="p-6">
 
 
                     @if (session('success'))
-                        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 "
                             role="alert">
                             <span class="font-medium">Success!</span> {{ session('success') }}.
                         </div>
                     @endif
 
-                    <form action="{{ route('pollingstation.store') }}" method="POST" class="">
+                    <form action="{{ route('pollingstation.store') }}" method="POST" class="text-white">
 
                         @csrf
+        
 
                         <div class="mb-6">
-                            <label for="SNO" class="block mb-2 text-gray-700 dark:text-gray-300  text-sm font-medium ">
+                            <label for="SNO" class="block mb-2   text-sm font-medium ">
                                 SNO:
                             </label>
                             <input type="number" id="SNO" name="SNO" value="{{ old('SNO') }}"
@@ -49,7 +50,7 @@
                         <div class="grid md:grid-cols-2 gap-2">
                             <div class="mb-6">
                                 <label for="locality"
-                                    class="block mb-2 text-gray-700 dark:text-gray-300  text-sm font-medium ">
+                                    class="block mb-2   text-sm font-medium ">
                                     Locality:
                                 </label>
                                 <input type="text" id="locality" name="locality" value="{{ old('locality') }}"
@@ -66,7 +67,7 @@
 
                             <div class="mb-6">
                                 <label for="building_location"
-                                    class="block mb-2 text-gray-700 dark:text-gray-300  text-sm font-medium ">
+                                    class="block mb-2   text-sm font-medium ">
                                     Building Location:
                                 </label>
                                 <input type="text" id="building_location" name="building_location"
@@ -84,7 +85,7 @@
 
                             <div class="mb-6">
                                 <label for="polling_area"
-                                    class="block mb-2 text-gray-700 dark:text-gray-300  text-sm font-medium ">
+                                    class="block mb-2   text-sm font-medium ">
                                     Polling Area:
                                 </label>
                                 <input type="text" id="polling_area" name="polling_area"
@@ -101,7 +102,7 @@
 
                             <div class="mb-6">
                                 <label for="total_votes"
-                                    class="block mb-2 text-gray-700 dark:text-gray-300  text-sm font-medium ">
+                                    class="block mb-2   text-sm font-medium ">
                                     Total Votes:
                                 </label>
                                 <input type="number" id="total_votes" name="total_votes"
