@@ -40,7 +40,7 @@ class MemberController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Memeber $memeber)
     {
 
         $this->authorize('is_admin');
@@ -67,7 +67,7 @@ class MemberController extends Controller
 
         }
 
-        $member = Memeber::create([
+        $memeber->create([
 
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
@@ -97,9 +97,9 @@ class MemberController extends Controller
      */
     public function edit(string $id)
     {
-     
+
         $this->authorize('is_admin');
-        
+
         $member = Memeber::query()->findOrFail($id);
 
         $sectionnames = SectionName::all();
@@ -113,7 +113,7 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-    
+
         $this->authorize('is_admin');
 
         $member = Memeber::findOrFail($id);
