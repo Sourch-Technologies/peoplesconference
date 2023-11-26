@@ -84,7 +84,7 @@
                         <x-dropdown-link>
                             {{ Auth::user()->name }}
                         </x-dropdown-link>
-                        <div></div>
+                      
 
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
