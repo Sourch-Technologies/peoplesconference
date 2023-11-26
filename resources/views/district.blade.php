@@ -48,13 +48,13 @@
 
 
                     <div class="flex justify-center ">
-                        <div class="overflow-auto lg:overflow-visible  w-full">
+                        <div class="overflow-auto lg:overflow-visible  w-full py-4 px-2">
                             @if ($districts)
 
                                 <div class="grid md:grid-cols-4 gap-3 text-center">
                                     @foreach ($districts as $district)
                                         <div
-                                            class="border border-gray-600 rounded p-3 hover:scale-105 duration-200 ease-in-out delay-75 hover:bg-gray-800 cursor-pointer space-y-3">
+                                            class="border border-gray-600   rounded p-3 hover:scale-105 duration-200 ease-in-out delay-75 hover:bg-gray-800 cursor-pointer space-y-3">
                                             <h1>{{ $district->name }}</h1>
                                             <a href="{{ route('district.show', [$district->id]) }}">Constituency :
                                                 {{ $district->constituencies_count }}</a>
