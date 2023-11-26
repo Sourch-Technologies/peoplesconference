@@ -80,8 +80,10 @@
                                                                 <td
                                                                     class="px-3 text-2xl font-medium dark:text-gray-400">
                                                                     <img class="w-7 h-7 rounded-full"
-                                                                        src="{{ asset('storage/photos/'. $member->photo) }}"
+                                                                        src="{{ asset('/storage/photos/'. $member->photo) }}"
                                                                         alt="">
+                                                                        {{ dd(asset('storage/images/' . auth()->user()->photo)) }}
+
                                                                 </td>
                                                                 <td class="px-3 py-2">
                                                                     <p>{{ $member->name }}</p>
