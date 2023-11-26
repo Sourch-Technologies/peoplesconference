@@ -62,7 +62,10 @@
 
         </main>
 
+
+        @include('components.footer')
     </div>
+    
 
     <script src="{{ asset('build/assets/app-21ee9d6e.js') }}"></script>
 

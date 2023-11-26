@@ -169,7 +169,7 @@
                             </div>
                         </div>
                     @else
-                        <h1 class="text-5xl text-center">No Members Awailable</h1>
+                        <h1 class="text-3xl text-center">No Members Available</h1>
                     @endif
 
                 </div>
