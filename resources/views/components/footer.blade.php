@@ -7,5 +7,5 @@
             <img class="w-20 rounded-md"  src="{{ asset('WebImages/Sourch_Technologies_Logo.png') }}" alt="">
         
         </a>
-   
+          
 </div>

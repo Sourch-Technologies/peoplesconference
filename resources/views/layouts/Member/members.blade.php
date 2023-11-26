@@ -80,7 +80,7 @@
                                                                 <td
                                                                     class="px-3 text-2xl font-medium dark:text-gray-400">
                                                                     <img class="w-7 h-7 rounded-full"
-                                                                        src="storage/photos/{{ $member->photo }}"
+                                                                        src="{{ asset('storage/photos/'. $member->photo) }}"
                                                                         alt="">
                                                                 </td>
                                                                 <td class="px-3 py-2">
@@ -161,7 +161,6 @@
                                             @endforeach
                                         @endforeach
                                     @endforeach
-
 
 
 

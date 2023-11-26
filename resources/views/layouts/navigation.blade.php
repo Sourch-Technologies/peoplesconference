@@ -55,8 +55,9 @@
                             <div class="">
                                 @auth
                                     @if (optional(auth()->user())->photo)
-                                        <img class=" h-10 w-10 rounded-full object-cover object-center"
-                                            alt="Image placeholder" src="/storage/images/{{ auth()->user()->photo }}" />
+                                        <img class="h-10 w-10 rounded-full object-cover object-center"
+                                            alt="Image placeholder"
+                                            src="{{ asset('storage/images/' . auth()->user()->photo) }}" />
                                     @else
                                         <!-- Show a placeholder image or default avatar -->
                                         Profile
@@ -84,7 +85,7 @@
                         <x-dropdown-link>
                             {{ Auth::user()->name }}
                         </x-dropdown-link>
-                      
+
 
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}

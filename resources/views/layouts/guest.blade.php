@@ -21,6 +21,7 @@
 </head>
 
 <body class="bg-gray-900">
+    
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 ">
         <div>
             <a href="/">
@@ -31,6 +32,9 @@
         <div class="w-full sm:max-w-md mt-6 px-6 py-4 border border-gray-600  shadow-md overflow-hidden sm:rounded-lg">
             {{ $slot }}
         </div>
+
+
+
     </div>
 
     <script src="{{ asset('build/assets/app-21ee9d6e.js') }}"></script>
