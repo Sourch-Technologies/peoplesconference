@@ -23,6 +23,8 @@ class SectionNameController extends Controller
     public function create()
     {
 
+        $this->authorize('is_admin');
+
         $pollingstations = PollingStation::select('id', 'locality')->get();
         
         return view('layouts.Section.create_section', compact('pollingstations'));

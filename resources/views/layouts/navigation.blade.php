@@ -36,11 +36,13 @@
                         {{ __('Members') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-2 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="url('section/create')" :active="Str::contains(request()->url(), 'section')">
-                        {{ __('Create Section') }}
-                    </x-nav-link>
-                </div>
+                @can('is_admin')
+                    <div class="hidden space-x-2 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="url('section/create')" :active="Str::contains(request()->url(), 'section')">
+                            {{ __('Create Section') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
 
 
             </div>
@@ -128,6 +130,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            
             <x-responsive-nav-link :href="url('dashboard')" :active="Str::contains(request()->url(), 'dashboard')">
                 {{ __('home') }}
             </x-responsive-nav-link>
@@ -148,9 +151,12 @@
                 {{ __('constituency') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="url('section/create')" :active="Str::contains(request()->url(), 'section')">
-                {{ __('Section') }}
-            </x-responsive-nav-link>
+
+            @can('is_admin')
+                <x-responsive-nav-link :href="url('section/create')" :active="Str::contains(request()->url(), 'section')">
+                    {{ __('Create Section') }}
+                </x-responsive-nav-link>
+            @endcan
 
 
         </div>
