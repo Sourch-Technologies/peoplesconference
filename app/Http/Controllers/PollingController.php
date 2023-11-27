@@ -35,8 +35,6 @@ class PollingController extends Controller
             ->orderBy('name', 'ASC')
             ->paginate(10);
 
-        // dd($constituencies);
-
         return view('layouts.PollingStation.pollingStation', compact('constituencies'));
 
     }
