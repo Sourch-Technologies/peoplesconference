@@ -222,9 +222,7 @@
 
                                                                             </a>
                                                                         </p>
-                                                                        <p>
-                                                                            Polling Stations
-                                                                        </p>
+                                                                      
                                                                        
                                                                     </div>
                                                                 </div>
