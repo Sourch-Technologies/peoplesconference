@@ -8,8 +8,10 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -18,10 +20,13 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
-    {
-        return view('auth.register');
-    }
+    // public function create(): View
+    // {
+
+    //     return view('errors.404', );
+
+    //     return view('auth.register');
+    // }
 
     /**
      * Handle an incoming registration request.

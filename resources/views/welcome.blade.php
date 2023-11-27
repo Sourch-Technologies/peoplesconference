@@ -40,11 +40,11 @@
                         class=" bg-black rounded text-white p-3 hover:bg-white duration-100 text-sm  delay-100 transition-all hover:scale-110 cursor-pointer  hover:text-black  focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
                         in</a>
 
-                    @if (Route::has('register'))
+                    {{-- @if (Route::has('register'))
                         <a href="{{ route('register') }}"
                             class="ml-4  bg-black rounded text-white p-3 hover:bg-white duration-100 text-sm 
                              delay-100 transition-all hover:scale-110 cursor-pointer  hover:text-black  focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                    @endif
+                    @endif --}}
                 @endauth
             </div>
         @endif
