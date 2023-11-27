@@ -33,7 +33,7 @@ class PollingController extends Controller
                 }
             ])
             ->orderBy('name', 'ASC')
-            ->get();
+            ->paginate(10);
 
         // dd($constituencies);
 

@@ -45,13 +45,13 @@
 
                     <div class="flex justify-center text-white">
                         <div class="container mx-auto ">
-                            <div>
+                            <div class=" min-h-[400px]">
 
 
                                 @foreach ($constituencies as $constituency)
-                                    <div class="rounded overflow-hidden border border-gray-700 my-5">
+                                    <div class="rounded overflow-hidden border border-gray-700 my-5 ">
                                         <!-- accordion-tab  -->
-                                        <div class="group outline-none accordion-section" tabindex="1">
+                                        <div class="group outline-none accordion-section " tabindex="1">
                                             <div
                                                 class="group bg-gray-900 flex justify-between px-4 py-3 items-center transition ease duration-500 cursor-pointer pr-10 relative">
                                                 <div class="group-focus:text-white transition ease duration-500">
@@ -208,8 +208,9 @@
                                     </div>
                                 @endforeach
 
-
+                                
                             </div>
+                            {{ $constituencies->links() }}
 
 
 

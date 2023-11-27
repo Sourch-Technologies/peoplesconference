@@ -36,7 +36,7 @@
                             @endif
 
 
-                            <div class="overflow-x-auto">
+                            <div class="overflow-x-auto min-h-[400px]">
                                 <table class="w-full p-6 text-xs text-left whitespace-nowrap">
                                     <colgroup>
                                         <col class="w-5">
@@ -80,7 +80,7 @@
                                                                 <td
                                                                     class="px-3 text-2xl font-medium dark:text-gray-400">
                                                                     <img class="w-7 h-7 rounded-full"
-                                                                        src="{{ asset('/storage/photos/'. $member->photo) }}"
+                                                                        src="{{ asset('/storage/photos/' . $member->photo) }}"
                                                                         alt="">
 
 
@@ -168,6 +168,7 @@
 
                                 </table>
                             </div>
+                            {{ $districts->links() }}
                         </div>
                     @else
                         <h1 class="text-3xl text-center">No Members Available</h1>

@@ -16,6 +16,8 @@ class DistrictController extends Controller
 
         $districts = District::withCount('constituencies')->paginate(10);
 
+        // dd($districts);
+
         return view('district', compact('districts'));
     }
 

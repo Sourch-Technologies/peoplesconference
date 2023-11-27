@@ -17,7 +17,7 @@ class MemberController extends Controller
     public function index()
     {
 
-        $districts = District::query()->with('constituencies.pollingstations.sectionnames.members')->get();
+        $districts = District::query()->with('constituencies.pollingstations.sectionnames.members')->paginate(1);
 
         return view('layouts.Member.members', compact('districts'));
 

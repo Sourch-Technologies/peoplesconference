@@ -55,8 +55,10 @@
 
     <div class="flex items-center justify-center  absolute bottom-0 gap-1 text-white font-extrabold w-full p-0">
         Developed & Designed By
-        <img class=" h-40 rounded-md p-0" src="{{ asset('WebImages/Sourch_Technologies_Logo-removebg-preview.png') }}"
-            alt="">
+        <a href="https://www.sourchtech.com/">
+            <img class=" h-40 rounded-md p-0"
+                src="{{ asset('WebImages/Sourch_Technologies_Logo-removebg-preview.png') }}" alt="">
+        </a>
     </div>
 
 
