@@ -83,8 +83,8 @@
 
                                                                                     <p>
                                                                                         <a
-                                                                                            href="{{ route('pollingstation.show', [$constituency->id]) }}">
 
+                                                                                            href="{{ route('pollingstation.show', [$constituency->id]) }}">
                                                                                             {{ $constituency->name }}
                                                                                         </a>
                                                                                     </p>
@@ -97,6 +97,7 @@
                                                                                         <div
                                                                                             class="flex items-center justify-around">
                                                                                             <a
+
                                                                                                 href="{{ route('constituency.edit', [$constituency->id]) }}">Edit</a>
                                                                                             <form
                                                                                                 action="{{ route('constituency.destroy', [$constituency->id]) }}"

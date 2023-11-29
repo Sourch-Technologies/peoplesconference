@@ -33,7 +33,6 @@ class PollingStation extends Model
         return $this->hasMany(Memeber::class);
 
     }
-
     public function sectionnames(): HasMany
     {
 

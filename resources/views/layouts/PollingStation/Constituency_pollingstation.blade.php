@@ -71,9 +71,11 @@
                                                         </ul>
                                                     </td>
                                                     <td>
-                                                        <ul>
-                                                            {{$sectionname->members_count}}
-                                                        </ul>
+                                                        @foreach ($pollingStation->sectionnames as $sectionname)
+                                                            <li>
+                                                                {{ $sectionname }}
+                                                            </li>
+                                                        @endforeach
                                                     </td>
                                                     <td class="whitespace-nowrap px-6 py-4">
                                                         <a

@@ -36,6 +36,7 @@ class PollingController extends Controller
             ->paginate(10)
             ->appends(['query' => $query]);
 
+
         return view('layouts.PollingStation.pollingStation', compact('pollingStations'));
     }
 
@@ -79,26 +80,16 @@ class PollingController extends Controller
     {
 
         // $constituencies = Constituency::with('pollingStations')->findOrFail($id);
-
         $constituency = Constituency::query()
             ->select('id', 'name')
-            ->with([
-                'pollingStations' => function ($q) {
-                    $q->select('id', 'SNO', 'locality', 'building_location', 'polling_area', 'total_votes', 'constituency_id')
-                        ->with([
-                            'sectionnames' => function ($q) {
-                                $q->select('id','name', 'polling_station_id')
-                                    ->withCount('members');
-                            }
-                        ]);
-                }
-            ])
+            ->with('pollingstations.sectionnames.members')
             ->where('id', $id)
             ->first();
 
 //        dd($constituency);
 
         return view('layouts.PollingStation.Constituency_pollingstation', compact('constituency'));
+
 
     }
 
