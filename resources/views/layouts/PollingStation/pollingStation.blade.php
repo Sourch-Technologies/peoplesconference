@@ -161,7 +161,7 @@
                                                                                     @foreach($pollingStation->sectionnames as $sectionname)
 
                                                                                                                                                                    <li>
-{{$sectionname->members_count}}
+                                                                                            {{$sectionname->members_count}}
                                                                                                                                                                    </li>
                                                                                     @endforeach
 
@@ -210,15 +210,9 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-
-
                             </div>
                             {{ $pollingStations->links() }}
-
-
-
                         </div>
                     </div>
 
