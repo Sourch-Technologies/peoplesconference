@@ -12,7 +12,7 @@ class SectionNameController extends Controller
      */
     public function index()
     {
-        
+
 
 
     }
@@ -26,7 +26,7 @@ class SectionNameController extends Controller
         $this->authorize('is_admin');
 
         $pollingstations = PollingStation::select('id', 'locality')->get();
-        
+
         return view('layouts.Section.create_section', compact('pollingstations'));
 
     }
@@ -36,11 +36,11 @@ class SectionNameController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $this->authorize('is_admin');
 
         $data = $request->validate([
-            'name' => 'required|string|unique:section_names,name,id',
+            'name' => 'required|string',
             'polling_station_id' => 'required|exists:polling_stations,id'
 
         ]);

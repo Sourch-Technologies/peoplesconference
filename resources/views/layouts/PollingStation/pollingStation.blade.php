@@ -8,7 +8,7 @@
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
             <h2 class="font-semibold text-xl text-white leading-tight">
-                {{ __('All Polling Stations With Constituencies') }}
+                {{ __('All Polling Stations') }}
             </h2>
             @can('is_admin')
                 <x-secondary-button>
@@ -24,6 +24,21 @@
 
     <div class="py-12 px-4">
         <div class=" mx-auto  ">
+            <form action="{{ route('pollingstation.index') }}" method="GET">
+                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                        </svg>
+                    </div>
+                    <input type="search"
+                           id="default-search"
+                           name="query"
+                           class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search ...">
+                    <button type="submit"  class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                </div>
+            </form>
             <div class=" overflow-hidden  sm:rounded">
                 <div class=" text-gray-900 dark:text-gray-100">
 
@@ -42,162 +57,153 @@
                         </div>
                     @endif
 
+{{--                        @foreach($pollingStations as $pollingStation)--}}
+{{--                            {{$pollingStation->locality}}--}}
+{{--                        @endforeach--}}
 
                     <div class="flex justify-center text-white">
                         <div class="container mx-auto ">
                             <div class=" min-h-[400px]">
 
 
-                                @foreach ($constituencies as $constituency)
+{{--                                    {{$pollingStation->locality}}--}}
                                     <div class="rounded overflow-hidden border border-gray-700 my-5 ">
                                         <!-- accordion-tab  -->
-                                        <div class="group outline-none accordion-section " tabindex="1">
-                                            <div
-                                                class="group bg-gray-900 flex justify-between px-4 py-3 items-center transition ease duration-500 cursor-pointer pr-10 relative">
-                                                <div class="group-focus:text-white transition ease duration-500">
-                                                    Constituency: {{ $constituency->name }}
+                                        <div class="mx-auto">
 
-                                                </div>
-                                                <div
-                                                    class="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:text-white group-focus:-rotate-180 absolute top-0 right-0 mb-auto ml-auto mt-2 mr-2">
-                                                    <i class="fas fa-chevron-down"></i>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="group-focus:max-h-screen max-h-0 bg-gray-800 px-4 overflow-hidden ease duration-500">
-                                                <!-- component -->
-                                                <!-- This is an example component -->
-                                                <div class="mx-auto">
+                                            <div class="flex flex-col">
+                                                <div class="overflow-x-auto">
+                                                    <div class="inline-block min-w-full align-middle">
+                                                        <div class="overflow-hidden ">
+                                                            <div class="p-2 ">
+                                                                <div class="overflow-x-auto">
+                                                                    <table
+                                                                        class="min-w-full text-left text-sm font-light">
+                                                                        <thead
+                                                                            class="border-b font-medium dark:border-neutral-500">
+                                                                        <tr>
+                                                                            <th scope="col"
+                                                                                class="px-6 py-4">
+                                                                                SNO</th>
+                                                                            <th scope="col"
+                                                                                class="px-6 py-4">
+                                                                                Locality</th>
+                                                                            <th scope="col"
+                                                                                class="px-6 py-4">
+                                                                                Building Location
+                                                                            </th>
+                                                                            <th scope="col"
+                                                                                class="px-6 py-4">
+                                                                                Polling Area</th>
+                                                                            <th scope="col"
+                                                                                class="px-6 py-4">
+                                                                                Total Votes</th>
+                                                                            <th scope="col"
+                                                                                class="px-6 py-4">
+                                                                                Section Names</th>
+                                                                            <th scope="col"
+                                                                                class="px-6 py-4">
+                                                                                Active Members</th>
+                                                                            @can('is_admin')
+                                                                                <th scope="col"
+                                                                                    class="px-6 py-4">
+                                                                                    Edit</th>
+                                                                                <th scope="col"
+                                                                                    class="px-6 py-4">
+                                                                                    Delete</th>
+                                                                            @endcan
 
-                                                    <div class="flex flex-col">
-                                                        <div class="overflow-x-auto">
-                                                            <div class="inline-block min-w-full align-middle">
-                                                                <div class="overflow-hidden ">
-                                                                    <div class="p-2 ">
-                                                                        <div class="overflow-x-auto">
-                                                                            <table
-                                                                                class="min-w-full text-left text-sm font-light">
-                                                                                <thead
-                                                                                    class="border-b font-medium dark:border-neutral-500">
-                                                                                    <tr>
-                                                                                        <th scope="col"
-                                                                                            class="px-6 py-4">
-                                                                                            SNO</th>
-                                                                                        <th scope="col"
-                                                                                            class="px-6 py-4">
-                                                                                            Locality</th>
-                                                                                        <th scope="col"
-                                                                                            class="px-6 py-4">
-                                                                                            Building Location
-                                                                                        </th>
-                                                                                        <th scope="col"
-                                                                                            class="px-6 py-4">
-                                                                                            Polling Area</th>
-                                                                                        <th scope="col"
-                                                                                            class="px-6 py-4">
-                                                                                            Total Votes</th>
-                                                                                        <th scope="col"
-                                                                                            class="px-6 py-4">
-                                                                                            Section Names</th>
-                                                                                        <th scope="col"
-                                                                                            class="px-6 py-4">
-                                                                                            Active Members</th>
-                                                                                        @can('is_admin')
-                                                                                            <th scope="col"
-                                                                                                class="px-6 py-4">
-                                                                                                Edit</th>
-                                                                                            <th scope="col"
-                                                                                                class="px-6 py-4">
-                                                                                                Delete</th>
-                                                                                        @endcan
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        @foreach ($pollingStations as $pollingStation)
 
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    @foreach ($constituency->pollingStations as $pollingStation)
-                                                                                        <tr
-                                                                                            class="border-b dark:border-neutral-500">
-                                                                                            <td
-                                                                                                class="whitespace-nowrap px-6 py-4 font-medium">
-                                                                                                {{ $pollingStation->SNO }}
-                                                                                            </td>
-                                                                                            <td
-                                                                                                class="whitespace-nowrap px-6 py-4">
-                                                                                                {{ $pollingStation->locality }}
-                                                                                            </td>
-                                                                                            <td
-                                                                                                class="whitespace-nowrap px-6 py-4">
-                                                                                                {{ $pollingStation->building_location }}
-                                                                                            </td>
-                                                                                            <td
-                                                                                                class="whitespace-nowrap px-6 py-4">
-                                                                                                {{ $pollingStation->polling_area }}
+                                                                        <tr
+                                                                            class="border-b dark:border-neutral-500">
+                                                                            <td
+                                                                                class="whitespace-nowrap px-6 py-4 font-medium">
+                                                                                {{ $pollingStation->SNO }}
+                                                                            </td>
+                                                                            <td
+                                                                                class="whitespace-nowrap px-6 py-4">
+                                                                                {{ $pollingStation->locality }}
+                                                                            </td>
+                                                                            <td
+                                                                                class="whitespace-nowrap px-6 py-4">
+                                                                                {{ $pollingStation->building_location }}
+                                                                            </td>
+                                                                            <td
+                                                                                class="whitespace-nowrap px-6 py-4">
+                                                                                {{ $pollingStation->polling_area }}
 
-                                                                                            </td>
-                                                                                            <td
-                                                                                                class="whitespace-nowrap px-6 py-4">
-                                                                                                {{ $pollingStation->total_votes }}
-                                                                                            </td>
-                                                                                            <td
-                                                                                                class="whitespace-nowrap px-6 py-4">
-                                                                                                <ul>
-                                                                                                    @foreach ($pollingStation->sectionnames as $sectionname)
-                                                                                                        <li>
-                                                                                                            {{ $sectionname->name }}
-                                                                                                        </li>
-                                                                                                    @endforeach
+                                                                            </td>
+                                                                            <td
+                                                                                class="whitespace-nowrap px-6 py-4">
+                                                                                {{ $pollingStation->total_votes }}
+                                                                            </td>
+                                                                            <td
+                                                                                class="whitespace-nowrap px-6 py-4">
+                                                                                <ul>
 
+                                                                                    @foreach($pollingStation->sectionnames as $sectionname)
 
-                                                                                                </ul>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <ul>
-                                                                                                    @foreach ($pollingStation->sectionnames as $sectionname)
-                                                                                                        <li>
-                                                                                                            {{ $sectionname->members_count }}
-
-                                                                                                        </li>
-                                                                                                    @endforeach
-
-                                                                                                </ul>
-                                                                                            </td>
-                                                                                            @can('is_admin')
-                                                                                                <td
-                                                                                                    class="whitespace-nowrap px-6 py-4">
-                                                                                                    <a
-                                                                                                        href="{{ route('pollingstation.edit', [$pollingStation->id]) }}">
-                                                                                                        <i
-                                                                                                            class="fa-solid fa-pen-to-square"></i>
-
-                                                                                                    </a>
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="whitespace-nowrap px-6 py-4">
-                                                                                                    <form
-                                                                                                        action="{{ route('pollingstation.destroy', [$pollingStation->id]) }}"
-                                                                                                        method="POST">
-                                                                                                        @csrf
-                                                                                                        @method('DELETE')
-                                                                                                        <button
-                                                                                                            type="submit">
-
-                                                                                                            <i
-                                                                                                                class="fa-solid fa-trash"></i>
-                                                                                                        </button>
-
-                                                                                                </td>
-                                                                                                </form>
-                                                                                            @endcan
-                                                                                        </tr>
+                                                                                    <li>
+                                                                                        {{$sectionname->name}}
+                                                                                    </li>
                                                                                     @endforeach
 
-                                                                                </tbody>
-                                                                            </table>
 
-                                                                        </div>
 
-                                                                    </div>
+                                                                                </ul>
+                                                                            </td>
+                                                                            <td>
+                                                                                <ul>
+                                                                                    @foreach($pollingStation->sectionnames as $sectionname)
+
+                                                                                                                                                                   <li>
+{{$sectionname->members_count}}
+                                                                                                                                                                   </li>
+                                                                                    @endforeach
+
+                                                                                </ul>
+                                                                            </td>
+                                                                            @can('is_admin')
+                                                                                <td
+                                                                                    class="whitespace-nowrap px-6 py-4">
+                                                                                    <a
+                                                                                        href="{{ route('pollingstation.edit', [$pollingStation->id]) }}">
+                                                                                        <i
+                                                                                            class="fa-solid fa-pen-to-square"></i>
+
+                                                                                    </a>
+                                                                                </td>
+                                                                                <td
+                                                                                    class="whitespace-nowrap px-6 py-4">
+                                                                                    <form
+                                                                                        action="{{ route('pollingstation.destroy', [$pollingStation->id]) }}"
+                                                                                        onsubmit="return confirm('Warning: Are You Sure You Want To Delete This Data? Your Data Will Be Lost');"
+                                                                                        method="POST">
+                                                                                        @csrf
+                                                                                        @method('DELETE')
+                                                                                        <button
+                                                                                            type="submit">
+
+                                                                                            <i
+                                                                                                class="fa-solid fa-trash"></i>
+                                                                                        </button>
+
+                                                                                </td>
+                                                                                </form>
+                                                                            @endcan
+                                                                        </tr>
+
+                                                                        @endforeach
+
+                                                                        </tbody>
+                                                                    </table>
+
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -206,11 +212,10 @@
                                         </div>
 
                                     </div>
-                                @endforeach
 
-                                
+
                             </div>
-                            {{ $constituencies->links() }}
+                            {{ $pollingStations->links() }}
 
 
 

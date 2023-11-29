@@ -19,16 +19,17 @@
 
     <link rel="stylesheet" href="{{ asset('style.css') }}">
 
-    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-871b95be.css') }}">
 
-    <script src="{{ asset('build/assets/app-21ee9d6e.js') }}"></script>
+{{--     <link rel="stylesheet" href="{{ asset('build/assets/app-871b95be.css') }}">--}}
 
-    <script src="{{ asset('custom.js') }}"></script> --}}
+{{--    <script src="{{ asset('build/assets/app-21ee9d6e.js') }}"></script>--}}
+
+    <script src="{{asset('custom.js')}}"></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css"  rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script> --}}
+{{--     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css"  rel="stylesheet" />--}}
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script> --}}
 
 
 </head>
@@ -52,7 +53,7 @@
                 </div>
 
             </header>
-            
+
         @endif
 
         <!-- Page Content -->
@@ -65,7 +66,7 @@
 
         @include('components.footer')
     </div>
-    
+
 
     <script src="{{ asset('build/assets/app-21ee9d6e.js') }}"></script>
 

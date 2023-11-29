@@ -14,14 +14,36 @@ class MemberController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->input('query');
 
-        $districts = District::query()->with('constituencies.pollingstations.sectionnames.members')->paginate(10);
+        if ($query) {
 
-        return view('layouts.Member.members', compact('districts'));
 
+            $members = Memeber::where('name', 'LIKE', '%' . $query . '%')
+                ->with([
+                    'sectionname.pollingstation.constituency.district',
+                ])->paginate(10)->appends(['query' => $query]);
+
+//            dd($members);
+            $member_count = Memeber::all()->count();
+
+            return view('layouts.Member.members', compact('member_count', 'members'));
+
+        } else {
+            $members = Memeber::with([
+                    'sectionname.pollingstation.constituency.district',
+                ])->paginate(10)->appends(['query' => $query]);
+
+            $member_count = Memeber::all()->count();
+
+            return view('layouts.Member.members', compact('member_count', 'members'));
+        }
     }
+
+
+
 
     /**
      * Show the form for creating a new resource.

@@ -11,15 +11,24 @@ class DistrictController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->input('query');
 
-        $districts = District::withCount('constituencies')->paginate(10);
-
-        // dd($districts);
+        // If there's a search query, filter the districts based on the query
+        if ($query) {
+            $districts = District::where('name', 'LIKE', '%' . $query . '%')
+                ->withCount('constituencies')
+                ->paginate(10)
+                ->appends(['query' => $query]); // Preserve the query parameter in pagination links
+        } else {
+            // If no search query, get all districts with counts
+            $districts = District::withCount('constituencies')->paginate(10);
+        }
 
         return view('district', compact('districts'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -71,7 +80,7 @@ class DistrictController extends Controller
 
 
         $this->authorize('is_admin');
-        
+
 
         $district = District::find($id);
 

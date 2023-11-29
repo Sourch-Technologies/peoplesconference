@@ -17,27 +17,30 @@ class PollingController extends Controller
      */
 
 
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->input('query');
 
-        $constituencies = Constituency::query()
-            ->select('id', 'name')
-            ->with([
-                'pollingStations' => function ($q) {
-                    $q->select('id', 'SNO', 'locality', 'building_location', 'polling_area', 'total_votes', 'constituency_id')
-                        ->with([
-                            'sectionnames' => function ($s) {
-                                return $s->withCount('members');
-                            }
-                        ]);
+        $pollingStations = PollingStation::with(['sectionnames' => function ($s) {
+            $s->withCount('members');
+        }])
+            ->where(function ($q) use ($query) {
+                // If there's a search query, filter the polling stations based on the query
+                if ($query) {
+                    $q->where('SNO', 'LIKE', '%' . $query . '%')
+                        ->orWhere('locality', 'LIKE', '%' . $query . '%') // Add more columns if needed
+                        ->orWhere('building_location', 'LIKE', '%' . $query . '%');
                 }
-            ])
-            ->orderBy('name', 'ASC')
-            ->paginate(10);
+            })
+            ->orderBy('locality', 'ASC') // Adjust the sorting as needed
+            ->paginate(10)
+            ->appends(['query' => $query]);
 
-        return view('layouts.PollingStation.pollingStation', compact('constituencies'));
-
+        return view('layouts.PollingStation.pollingStation', compact('pollingStations'));
     }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -82,12 +85,18 @@ class PollingController extends Controller
             ->with([
                 'pollingStations' => function ($q) {
                     $q->select('id', 'SNO', 'locality', 'building_location', 'polling_area', 'total_votes', 'constituency_id')
-                        ->with('sectionnames');
+                        ->with([
+                            'sectionnames' => function ($q) {
+                                $q->select('id','name', 'polling_station_id')
+                                    ->withCount('members');
+                            }
+                        ]);
                 }
             ])
             ->where('id', $id)
             ->first();
 
+//        dd($constituency);
 
         return view('layouts.PollingStation.Constituency_pollingstation', compact('constituency'));
 

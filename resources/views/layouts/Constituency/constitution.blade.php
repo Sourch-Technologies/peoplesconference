@@ -84,6 +84,7 @@
                                                                                     <p>
                                                                                         <a
                                                                                             href="{{ route('pollingstation.show', [$constituency->id]) }}">
+
                                                                                             {{ $constituency->name }}
                                                                                         </a>
                                                                                     </p>
@@ -99,7 +100,8 @@
                                                                                                 href="{{ route('constituency.edit', [$constituency->id]) }}">Edit</a>
                                                                                             <form
                                                                                                 action="{{ route('constituency.destroy', [$constituency->id]) }}"
-                                                                                                method="POST">
+                                                                                                onsubmit="return confirm('Warning: Are You Sure You Want To Delete This Data? Your Data Will Be Lost');"
+                                                                                            method="POST">
                                                                                                 @csrf
                                                                                                 @method('DELETE')
                                                                                                 <button
@@ -222,8 +224,8 @@
 
                                                                             </a>
                                                                         </p>
-                                                                      
-                                                                       
+
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -273,8 +275,8 @@
                                                                                    Anantnag
                                                                                 </a>
                                                                             </p>
-                                           
-                                                                          
+
+
                                                                         </div>
 
                                                                 </div>
