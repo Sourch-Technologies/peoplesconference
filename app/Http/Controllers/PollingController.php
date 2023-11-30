@@ -32,7 +32,7 @@ class PollingController extends Controller
                         ->orWhere('building_location', 'LIKE', '%' . $query . '%');
                 }
             })
-            ->orderBy('locality', 'ASC') // Adjust the sorting as needed
+            ->orderBy('id', 'ASC')
             ->paginate(10)
             ->appends(['query' => $query]);
 

@@ -102,7 +102,7 @@
                                                             <tr>
 
                                                                 <td class="px-3 py-2">
-                                                                    {{$member->id}}
+                                                                    JKPC{{Str::random(5)}}
                                                                 </td>
 
                                                                 <td
