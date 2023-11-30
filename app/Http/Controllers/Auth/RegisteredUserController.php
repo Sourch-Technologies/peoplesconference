@@ -20,13 +20,11 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    // public function create(): View
-    // {
+     public function create(): View
+     {
 
-    //     return view('errors.404', );
-
-    //     return view('auth.register');
-    // }
+         return view('auth.register');
+     }
 
     /**
      * Handle an incoming registration request.
