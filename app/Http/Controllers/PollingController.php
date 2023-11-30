@@ -85,6 +85,7 @@ class PollingController extends Controller
                 $query->withCount('members');
             }])
             ->where('id', $id)
+            ->orderBy('id')
             ->first();
 
 
