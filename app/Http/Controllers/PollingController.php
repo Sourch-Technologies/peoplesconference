@@ -25,17 +25,16 @@ class PollingController extends Controller
             $s->withCount('members');
         }])
             ->where(function ($q) use ($query) {
-                // If there's a search query, filter the polling stations based on the query
+
                 if ($query) {
                     $q->where('SNO', 'LIKE', '%' . $query . '%')
-                        ->orWhere('locality', 'LIKE', '%' . $query . '%') // Add more columns if needed
+                        ->orWhere('locality', 'LIKE', '%' . $query . '%')
                         ->orWhere('building_location', 'LIKE', '%' . $query . '%');
                 }
             })
-            ->orderBy('id', 'ASC')
+            ->orderBy('id', 'asc')
             ->paginate(10)
             ->appends(['query' => $query]);
-
 
         return view('layouts.PollingStation.pollingStation', compact('pollingStations'));
     }
