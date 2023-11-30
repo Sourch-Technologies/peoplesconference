@@ -79,12 +79,14 @@ class PollingController extends Controller
     public function show(string $id)
     {
 
-        // $constituencies = Constituency::with('pollingStations')->findOrFail($id);
         $constituency = Constituency::query()
             ->select('id', 'name')
-            ->with('pollingstations.sectionnames.members')
+            ->with(['pollingstations.sectionnames' => function ($query) {
+                $query->withCount('members');
+            }])
             ->where('id', $id)
             ->first();
+
 
 //        dd($constituency);
 
