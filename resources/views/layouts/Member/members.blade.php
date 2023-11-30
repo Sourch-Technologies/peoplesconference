@@ -8,7 +8,7 @@
 
             </h2>
 
-            <h1 class="text-white">Members Awailable: {{$member_count}} </h1>
+            <h1 class="text-white">Members Available: {{$member_count}} </h1>
 
 
             @can('is_admin')

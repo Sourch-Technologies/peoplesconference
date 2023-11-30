@@ -3,7 +3,7 @@
         <div class="flex flex-col md:flex-row gap-4  md:items-center justify-between">
 
             <h2 class="font-semibold text-xl text-white leading-tight">
-{{--                {{ $constituency->name }} {{ __('Constituency With Polling Stations') }}--}}
+                {{ $constituency->name }} {{ __('Constituency With Polling Stations') }}
             </h2>
             <x-secondary-button>
                 <a href="{{ route('pollingstation.create') }}">
@@ -14,15 +14,7 @@
     </x-slot>
 
 
-    <h2 class="font-semibold text-xl text-white leading-tight">
-{{--        {{ $constituency->name }} {{ __('Constituency With Polling Stations') }}--}}
-    </h2>
 
-    @foreach ($constituency->pollingstations as $pollingStation)
-        @foreach ($pollingStation->sectionnames as $sectionname)
-            <td class="whitespace-nowrap px-6 py-4">{{ $sectionname->members_count }}</td>
-        @endforeach
-    @endforeach
 
 
     <div class="py-12">
