@@ -32,7 +32,7 @@ class PollingController extends Controller
                         ->orWhere('building_location', 'LIKE', '%' . $query . '%');
                 }
             })
-            ->orderBy('id', 'asc')
+            ->orderBy('SNO', 'asc')
             ->paginate(10)
             ->appends(['query' => $query]);
 
