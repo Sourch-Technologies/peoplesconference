@@ -36,35 +36,45 @@
                                 Section Name:
                             </label>
                             <input type="text" id="name" name="name" value="{{ old('name') }}"
-                                class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
-                                block w-full p-2.5 dark:bg-gray-700 
+                                class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
+                                block w-full p-2.5 dark:bg-gray-700
                                 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white ">
-                            
+
                             @error('name')
                                 <span class="text-red-500">{{ $errors->first('name') }}</span>
                             @enderror
                         </div>
 
+                    <div class="mb-6">
+
+                        <select id="constituency"
+                                class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
+                                block w-full p-2.5 dark:bg-gray-700
+                                dark:border-gray-600 dark:placeholder-gray-700 dark:text-white ">
+                            @if ($constituencies)
+
+                                <option value="">Select Constituency</option>
+                                @foreach ($constituencies as $constituency)
+                                    <option value="{{ $constituency->id }}">{{ $constituency->name }}
+                                    </option>
+                                @endforeach
+                            @else
+                            @endif
+                        </select>
+
+                    </div>
+
                         <div class="mb-6">
 
-                            <select id="polling_station_id" name="polling_station_id"
-                                class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
-                                block w-full p-2.5 dark:bg-gray-700 
+                            <select id="polling_station_id selectPollingStation"  name="polling_station_id"
+                                class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
+                                block w-full p-2.5 dark:bg-gray-700
                                 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white ">
-                                @if ($pollingstations)
 
-                                    <option value="">Select Polling Station</option>
-                                    @foreach ($pollingstations as $pollingstation)
-                                        <option value="{{ $pollingstation->id }}">{{ $pollingstation->locality }}
-                                        </option>
-                                    @endforeach
-                                @else
-                                @endif
                             </select>
                             @error('polling_station_id')
                                 <span class="text-red-500">{{ $errors->first('polling_station_id') }}</span>
                             @enderror
-
                         </div>
 
 
@@ -78,3 +88,21 @@
         </div>
     </div>
 </x-app-layout>
+<script>
+    document.getElementById('constituency').addEventListener('change', function() {
+        var selectedConstituencyId = this.value;
+
+        console.log(selectedConstituencyId);
+
+        // Make an AJAX request to fetch sections based on the selected constituency
+        fetch(`{{ route('pollingstation.fetch-sections', ['constituency_id' => ':constituency_id']) }}`.replace(':constituency_id', selectedConstituencyId))
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response as needed
+                console.log(data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>

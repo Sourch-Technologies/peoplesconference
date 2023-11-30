@@ -50,6 +50,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/member', MemberController::class);
     Route::resource('/district', DistrictController::class);
     Route::resource('/pollingstation', PollingController::class);
+
+    Route::get('/pollingstation/fetch-sections/{constituency_id}', [PollingController::class , 'fetchSections'])->name('pollingstation.fetch-sections');
+
+
     Route::resource('/constituency', ConstitutionController::class);
     Route::resource('/section', SectionNameController::class);
 

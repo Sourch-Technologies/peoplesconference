@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Constituency;
 use App\Models\PollingStation;
 use Illuminate\Http\Request;
 
@@ -25,9 +26,11 @@ class SectionNameController extends Controller
 
         $this->authorize('is_admin');
 
+        $constituencies = Constituency::all();
+
         $pollingstations = PollingStation::select('id', 'locality')->get();
 
-        return view('layouts.Section.create_section', compact('pollingstations'));
+        return view('layouts.Section.create_section', compact('pollingstations', 'constituencies'));
 
     }
 
@@ -59,7 +62,13 @@ class SectionNameController extends Controller
      */
     public function show(string $id)
     {
-        //
+
+        $pollingStations = PollingStation::where('constituency_id', $id)->get();
+
+        dd($pollingStations);
+
+        return route('section.create', 'pollingStations');
+
     }
 
     /**

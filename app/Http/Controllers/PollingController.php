@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePollingStationRequest;
 use App\Models\Constituency;
 use App\Models\District;
 use App\Models\PollingStation;
+use App\Models\SectionName;
 use Illuminate\Http\Request;
 
 class PollingController extends Controller
@@ -87,7 +88,6 @@ class PollingController extends Controller
             ->orderBy('id')
             ->first();
 
-
 //        dd($constituency);
 
         return view('layouts.PollingStation.Constituency_pollingstation', compact('constituency'));
@@ -117,30 +117,26 @@ class PollingController extends Controller
     public function update(Request $request, string $id)
     {
 
-        $this->authorize('is_admin');
 
-        $data = $request->validate([
-
-            'SNO' => 'numeric|unique:polling_stations,SNO,' . $id,
+        // Validate the form data
+        $validatedData = $request->validate([
+            'SNO' => 'required|numeric|unique:polling_stations,SNO,' . $id,
             'locality' => 'required|string|unique:polling_stations,locality,' . $id,
             'building_location' => 'required|string',
             'polling_area' => 'required|string',
             'total_votes' => 'required|numeric',
-            'constituency_id' => 'required|exists:constituencies,id'
-
-
+            'constituency_id' => 'required|exists:constituencies,id',
         ]);
 
-        // $pollingstation = PollingStation::query()->findOrFail($id);
+        // Find the polling station by ID
+        $pollingStation = PollingStation::findOrFail($id);
 
-        // $pollingstation->update($data);
+        // Update the polling station with the validated data
+        $pollingStation->update($validatedData);
 
-        $pollingstation = Constituency::query()
-            ->findOrFail($data['constituency_id'])
-            ->pollingstations()
-            ->update($data);
+        // Redirect to the index page with a success message
+        return redirect()->route('pollingstation.index')->with('success', 'Polling Station updated successfully');
 
-        return redirect()->route('pollingstation.index')->with('success', 'Polling Station Created');
 
     }
 
@@ -157,6 +153,14 @@ class PollingController extends Controller
         $pollingstation->delete();
 
         return redirect()->back()->with('success', 'Polling Station Deleted');
+
+    }
+    public function fetchSections($id){
+
+        // Add logic to fetch section names based on the $constituency_id
+        $sections = SectionName::where('constituency_id', $id)->get();
+
+        return response()->json($sections);
 
     }
 }
