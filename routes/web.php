@@ -8,9 +8,8 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PollingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionNameController;
-use Illuminate\Http\Request;
+use App\Models\Memeber;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +32,6 @@ Route::get('/', function () {
 //     $user = $request->user();
 
 
-
-
 // })->middleware(['auth', 'verified'])->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -47,11 +44,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('/dashboard', HomeController::class);
     Route::put('/profile', [AdminPhotoController::class, 'update_photo'])->name('profile.admin_update_photo');
+
     Route::resource('/member', MemberController::class);
+    Route::get('/member/fetch-members/{polling_station_id}', [MemberController::class, 'fetchsections'])->name('member.fetchPollingStation');
+
+
     Route::resource('/district', DistrictController::class);
     Route::resource('/pollingstation', PollingController::class);
 
-    Route::get('/pollingstation/fetch-sections/{constituency_id}', [PollingController::class , 'fetchSections'])->name('pollingstation.fetch-sections');
+    Route::get('/pollingstation/fetch-sections/{constituency_id}', [PollingController::class, 'fetchSections'])->name('pollingstation.fetch-sections');
 
 
     Route::resource('/constituency', ConstitutionController::class);

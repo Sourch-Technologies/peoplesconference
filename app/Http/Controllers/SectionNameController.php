@@ -28,9 +28,9 @@ class SectionNameController extends Controller
 
         $constituencies = Constituency::all();
 
-        $pollingstations = PollingStation::select('id', 'locality')->get();
 
-        return view('layouts.Section.create_section', compact('pollingstations', 'constituencies'));
+
+        return view('layouts.Section.create_section', compact( 'constituencies'));
 
     }
 

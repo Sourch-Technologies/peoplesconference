@@ -15,7 +15,7 @@
 
     <div class="py-12 p-4">
         <div class=" mx-auto ">
-            <div class=" dark:bg-gray-800 overflow-hidden  sm:rounded">
+            <div class="  overflow-hidden  sm:rounded">
                 <div class=" text-white">
 
 
@@ -36,8 +36,8 @@
                                 SNO:
                             </label>
                             <input type="number" id="SNO" name="SNO" value="{{ $polling_station->SNO }}"
-                                class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
-                                block w-full p-2.5 dark:bg-gray-700 
+                                class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
+                                block w-full p-2.5 dark:bg-gray-700
                                 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white">
                             @error('SNO')
                                 <span class="text-red-500">{{ $errors->first('SNO') }}</span>
@@ -54,8 +54,8 @@
                                     Locality:
                                 </label>
                                 <input type="text" id="locality" name="locality" value="{{ $polling_station->locality }}"
-                                    class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
-                                block w-full p-2.5 dark:bg-gray-700 
+                                    class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
+                                block w-full p-2.5 dark:bg-gray-700
                                 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white">
                                 @error('locality')
                                     <span class="text-red-500">{{ $errors->first('locality') }}</span>
@@ -72,8 +72,8 @@
                                 </label>
                                 <input type="text" id="building_location" name="building_location"
                                     value="{{ $polling_station->building_location }}"
-                                    class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
-                                block w-full p-2.5 dark:bg-gray-700 
+                                    class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
+                                block w-full p-2.5 dark:bg-gray-700
                                 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white">
                                 @error('building_location')
                                     <span class="text-red-500">{{ $errors->first('building_location') }}</span>
@@ -90,8 +90,8 @@
                                 </label>
                                 <input type="text" id="polling_area" name="polling_area"
                                     value="{{ $polling_station->polling_area }}"
-                                    class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
-                                block w-full p-2.5 dark:bg-gray-700 
+                                    class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
+                                block w-full p-2.5 dark:bg-gray-700
                                 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white">
                                 @error('polling_area')
                                     <span class="text-red-500">{{ $errors->first('polling_area') }}</span>
@@ -107,8 +107,8 @@
                                 </label>
                                 <input type="number" id="total_votes" name="total_votes"
                                     value="{{ $polling_station->total_votes  }}"
-                                    class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
-                                block w-full p-2.5 dark:bg-gray-700 
+                                    class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
+                                block w-full p-2.5 dark:bg-gray-700
                                 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white">
                                 @error('total_votes')
                                     <span class="text-red-500">{{ $errors->first('total_votes') }}</span>
@@ -121,8 +121,8 @@
                         <div class="mb-6">
 
                             <select id="constituency_id" name="constituency_id"
-                                class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg 
-                                block w-full p-2.5 dark:bg-gray-700 
+                                class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
+                                block w-full p-2.5 dark:bg-gray-700
                                 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white">
                                 @if ($constituencies)
 

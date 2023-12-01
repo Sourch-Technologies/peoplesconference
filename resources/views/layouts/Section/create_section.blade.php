@@ -28,7 +28,7 @@
 
 
 
-                    <form action="{{ route('section.store') }}" method="POST" " class="border p-4 rounded  border-gray-700">
+                    <form action="{{ route('section.store') }}" method="POST"  class="border p-4 rounded  border-gray-700">
 
                         @csrf
                         <div class="mb-6">
@@ -51,7 +51,7 @@
                                 class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
                                 block w-full p-2.5 dark:bg-gray-700
                                 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white ">
-                            @if ($constituencies)
+                            @if (count($constituencies) > 0)
 
                                 <option value="">Select Constituency</option>
                                 @foreach ($constituencies as $constituency)
@@ -59,6 +59,7 @@
                                     </option>
                                 @endforeach
                             @else
+
                             @endif
                         </select>
 
@@ -66,11 +67,11 @@
 
                         <div class="mb-6">
 
-                            <select id="polling_station_id selectPollingStation"  name="polling_station_id"
+                            <select id="polling_station_id"  name="polling_station_id"
                                 class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
                                 block w-full p-2.5 dark:bg-gray-700
                                 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white ">
-
+                                <option>Select Polling Station</option>
                             </select>
                             @error('polling_station_id')
                                 <span class="text-red-500">{{ $errors->first('polling_station_id') }}</span>
@@ -87,22 +88,41 @@
             </div>
         </div>
     </div>
-</x-app-layout>
-<script>
-    document.getElementById('constituency').addEventListener('change', function() {
-        var selectedConstituencyId = this.value;
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var constituencySelect = document.getElementById('constituency');
+            var pollingStationSelect = document.getElementById('polling_station_id');
 
-        console.log(selectedConstituencyId);
+            constituencySelect.addEventListener('change', function () {
+                var selectedConstituencyId = this.value;
 
-        // Make an AJAX request to fetch sections based on the selected constituency
-        fetch(`{{ route('pollingstation.fetch-sections', ['constituency_id' => ':constituency_id']) }}`.replace(':constituency_id', selectedConstituencyId))
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response as needed
-                console.log(data);
-            })
-            .catch(error => {
-                console.error(error);
+                // Make an AJAX request to fetch polling stations based on the selected constituency
+                fetch('{{ url('/pollingstation/fetch-sections') }}/' + selectedConstituencyId, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Clear existing options
+                        pollingStationSelect.innerHTML = '';
+
+                        // Add options based on the fetched data
+                        data.forEach(pollingStation => {
+                            var option = document.createElement('option');
+                            option.value = pollingStation.id;
+                            option.textContent = pollingStation.locality;
+                            pollingStationSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
             });
-    });
-</script>
+        });
+    </script>
+</x-app-layout>
+
+

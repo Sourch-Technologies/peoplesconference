@@ -157,10 +157,13 @@ class PollingController extends Controller
     }
     public function fetchSections($id){
 
-        // Add logic to fetch section names based on the $constituency_id
-        $sections = SectionName::where('constituency_id', $id)->get();
+        $pollingstations = PollingStation::where('constituency_id', $id)->get();
 
-        return response()->json($sections);
+        if ($pollingstations->isEmpty()) {
+            return response()->json(['error' => 'Sections not found for the specified polling station.'], 404);
+        }
+
+        return response()->json($pollingstations);
 
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\District;
 use App\Models\Memeber;
+use App\Models\PollingStation;
 use App\Models\SectionName;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -53,9 +54,9 @@ class MemberController extends Controller
 
         $this->authorize('is_admin');
 
-        $sectionNames = SectionName::select('name', 'id')->get();
+        $pollingstations = PollingStation::pluck('id', 'locality')->all();
 
-        return view('layouts.Member.create-member', compact('sectionNames'));
+        return view('layouts.Member.create-member', compact('pollingstations'));
 
     }
 
@@ -126,7 +127,9 @@ class MemberController extends Controller
 
         $sectionnames = SectionName::all();
 
-        return view('layouts.Member.edit-member', compact('member', 'sectionnames'));
+        $pollingstations = PollingStation::pluck('id', 'locality')->all();
+
+        return view('layouts.Member.edit-member', compact('member', 'sectionnames', 'pollingstations'));
 
     }
 
@@ -186,6 +189,18 @@ class MemberController extends Controller
         $member->destroy($id);
 
         return redirect()->back()->with('success', 'Member Deleted');
+
+    }
+
+    public function fetchsections($id){
+
+        $sectionnames = SectionName::where('polling_station_id', $id)->get();
+
+        if ($sectionnames->isEmpty()) {
+            return response()->json(['error' => 'Sections not found for the specified polling station.'], 404);
+        }
+
+        return response()->json($sectionnames);
 
     }
 }

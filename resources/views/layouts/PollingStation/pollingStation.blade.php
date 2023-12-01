@@ -44,22 +44,19 @@
 
                     @if (session('error'))
                         <x-error>
-                            <span class="font-medium">Error!:</span>
+                            <span class="font-medium mt-4">Error!:</span>
                             {{ session('error') }}
                         </x-error>
                     @endif
 
 
                     @if (session('success'))
-                        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                        <div class="p-4 mt-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
                             role="alert">
                             <span class="font-medium">Success!</span> {{ session('success') }}.
                         </div>
                     @endif
 
-{{--                        @foreach($pollingStations as $pollingStation)--}}
-{{--                            {{$pollingStation->locality}}--}}
-{{--                        @endforeach--}}
 
                     <div class="flex justify-center text-white">
                         <div class="container mx-auto ">
