@@ -151,7 +151,7 @@
                                 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white ">
                                                         @if ($pollingstations)
 
-                                                            <option value="">Select Polling Station</option>
+                                                            <option value="">Select Polling Station(Locality)</option>
                                                             @foreach ($pollingstations as $key => $value)
                                                                 <option value="{{ $value }}">{{$key}}</option>
                                                             @endforeach

@@ -71,7 +71,7 @@
                                 class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
                                 block w-full p-2.5 dark:bg-gray-700
                                 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white ">
-                                <option>Select Polling Station</option>
+                                <option>Select Polling Station(Locality)</option>
                             </select>
                             @error('polling_station_id')
                                 <span class="text-red-500">{{ $errors->first('polling_station_id') }}</span>
