@@ -87,7 +87,7 @@
                                                                                 Locality</th>
                                                                             <th scope="col"
                                                                                 class="px-6 py-4">
-                                                                                Building Location
+                                                                                Building Location/ Polling Station
                                                                             </th>
                                                                             <th scope="col"
                                                                                 class="px-6 py-4">

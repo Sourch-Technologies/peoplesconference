@@ -147,9 +147,8 @@
                                             </td>
                                             <td class="px-3 py-2">
 
-
                                                 <p class="dark:text-gray-400">
-                                                {{$member->sectionname->pollingstation->polling_area}}
+                                                {{$member->sectionname->pollingstation->building_location}}
                                             </td>
                                             <td class="px-3 py-2">
 
