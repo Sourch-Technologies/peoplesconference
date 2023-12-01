@@ -46,7 +46,10 @@
                         </div>
 
                     <div class="mb-6">
-
+                        <label
+                            class="font-semibold block  text-sm text-gray-700 dark:text-gray-300  py-2"
+                            for="constituency">Section Constituency<abbr
+                                title="required"></label>
                         <select id="constituency"
                                 class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
                                 block w-full p-2.5 dark:bg-gray-700
@@ -66,7 +69,10 @@
                     </div>
 
                         <div class="mb-6">
-
+                            <label
+                                class="font-semibold block  text-sm text-gray-700 dark:text-gray-300  py-2"
+                                for="constituency">Section Polling Station(Locality)<abbr
+                                    title="required"></label>
                             <select id="polling_station_id"  name="polling_station_id"
                                 class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
                                 block w-full p-2.5 dark:bg-gray-700
