@@ -12,14 +12,27 @@ class SectionNameController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->input('query');
 
-        $sections = SectionName::with('members')->orderBy('id')->paginate(10);
+        // Use a conditional check to determine whether a search query is provided
+        if ($query) {
+            $sectionnames = SectionName::where('name', 'LIKE', '%' . $query . '%')
+                ->with('pollingstation')
+                ->orderBy('id')
+                ->paginate(10)
+                ->appends(['query' => $query]);
+        } else {
+            // If no search query is provided, retrieve all records without the WHERE clause
+            $sectionnames = SectionName::with('pollingstation')
+                ->orderBy('id')
+                ->paginate(10);
+        }
 
-        return view('layouts.Section.section', compact('sections'));
-
+        return view('layouts.Section.section', compact('sectionnames'));
     }
+
 
     /**
      * Show the form for creating a new resource.
