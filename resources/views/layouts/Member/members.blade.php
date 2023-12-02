@@ -103,9 +103,23 @@
                                         <tbody class="border-b dark:bg-gray-900 dark:border-gray-700 ">
                                         <tr>
 
-                                            <td class="px-3 py-2">
-                                                JKPC{{Str::random(5)}}
-                                            </td>
+
+                                                @php
+                                                    // Extract the first letter from each field
+                                                    $firstLetters = strtoupper(substr($member->sectionname->pollingstation->constituency->district->name, 0, 1) .
+                                                                    substr($member->sectionname->pollingstation->constituency->name, 0, 1) .
+                                                                    substr($member->sectionname->pollingstation->locality, 0, 1));
+
+                                                    // Format the counter with leading zeros
+                                                    $formattedCounter = sprintf("%02d", $loop->iteration);
+
+                                                    // Combine "JKPC", the first letters, and formatted counter
+                                                    $result = "JKPC" . $firstLetters . $formattedCounter;
+                                                @endphp
+
+                                                <td class="px-3 py-2">{{ $result }}</td>
+
+
 
                                             <td
                                                 class="px-3 text-2xl font-medium dark:text-gray-400">

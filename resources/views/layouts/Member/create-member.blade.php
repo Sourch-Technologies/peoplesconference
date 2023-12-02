@@ -126,6 +126,10 @@
 
 
                                             <div class="mb-6">
+                                                <label
+                                                    class="font-semibold block  text-sm text-white  py-2"
+                                                    for="constituency">Select Polling Station(Locality)<abbr
+                                                        title="required"></label>
                                                 <select id="polling_station_id"
                                                         class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
                                 block w-full p-2.5 dark:bg-gray-700
@@ -145,7 +149,10 @@
                                             <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
 
                                                 <div class="w-full flex flex-col mb-3">
-
+                                                    <label
+                                                        class="font-semibold block  text-sm text-white  py-2"
+                                                        for="constituency">Select Section Names<abbr
+                                                            title="required"></label>
                                                     <select
                                                         class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
                                                              block w-full p-2.5 dark:bg-gray-700

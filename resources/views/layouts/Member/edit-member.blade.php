@@ -142,9 +142,8 @@
 
                                                 <div class="mb-6">
                                                     <label
-                                                        class="font-semibold block  text-sm text-gray-700 dark:text-gray-300  py-2"
-                                                        for="section_name_id">Section Polling Station<abbr
-                                                            title="required"></label>
+                                                        class="font-semibold block  text-sm text-white py-2"
+                                                        for="section_name_id">Select Polling Station></label>
                                                     <select id="polling_station_id"
                                                             class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
                                 block w-full p-2.5 dark:bg-gray-700
@@ -163,9 +162,10 @@
 
                                                 <div class=" flex flex-col mb-3">
                                                     <label
-                                                        class="font-semibold block  text-sm text-gray-700 dark:text-gray-300  py-2"
-                                                        for="section_name_id">Section
-                                                        Name<abbr title="required"></label>
+                                                        class="font-semibold block text-sm text-white py-2"
+                                                        for="section_name_id">
+                                                        Select Section Names
+                                                    </label>
                                                     <select
                                                         class="bg-gray-700 border border-gray-800 text-gray-100 text-sm rounded-lg
                                 block w-full p-2.5 dark:bg-gray-700

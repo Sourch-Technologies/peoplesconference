@@ -15,12 +15,12 @@ class SectionName extends Model
 
     public function members(): HasMany{
 
-        return $this->hasMany(Memeber::class);
+        return $this->hasMany(Memeber::class, 'section_name_id', 'id');
 
     }
 
     public function pollingstation(): BelongsTo {
-        
+
         Return $this->belongsTo(PollingStation::class, 'polling_station_id', 'id');
 
     }

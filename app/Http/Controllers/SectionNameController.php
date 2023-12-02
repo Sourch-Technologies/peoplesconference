@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Constituency;
 use App\Models\PollingStation;
+use App\Models\SectionName;
 use Illuminate\Http\Request;
 
 class SectionNameController extends Controller
@@ -14,7 +15,9 @@ class SectionNameController extends Controller
     public function index()
     {
 
+        $sections = SectionName::with('members')->orderBy('id')->get();
 
+        return view('layouts.Section.section', compact('sections'));
 
     }
 
@@ -28,9 +31,7 @@ class SectionNameController extends Controller
 
         $constituencies = Constituency::all();
 
-
-
-        return view('layouts.Section.create_section', compact( 'constituencies'));
+        return view('layouts.Section.create_section', compact('constituencies'));
 
     }
 
@@ -42,16 +43,11 @@ class SectionNameController extends Controller
 
         $this->authorize('is_admin');
 
-        $data = $request->validate([
-            'name' => 'required|string',
-            'polling_station_id' => 'required|exists:polling_stations,id'
+        $data = $request->validate(['name' => 'required|string', 'polling_station_id' => 'required|exists:polling_stations,id'
 
         ]);
 
-        PollingStation::query()
-            ->findOrFail($data['polling_station_id'])
-            ->sectionnames()
-            ->create($data);
+        PollingStation::query()->findOrFail($data['polling_station_id'])->sectionnames()->create($data);
 
         return redirect()->back()->with('success', 'Section Created!');
 
@@ -65,8 +61,6 @@ class SectionNameController extends Controller
 
         $pollingStations = PollingStation::where('constituency_id', $id)->get();
 
-        dd($pollingStations);
-
         return route('section.create', 'pollingStations');
 
     }
@@ -76,7 +70,14 @@ class SectionNameController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $this->authorize('is_admin');
+
+        $section = SectionName::findOrFail($id);
+
+        $constituencies = Constituency::all();
+
+        return view('layouts.Section.edit-section', compact('section', 'constituencies'));
+
     }
 
     /**
@@ -84,14 +85,29 @@ class SectionNameController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $this->authorize('is_admin');
+
+        $validatedData = $request->validate(['name' => 'required|string']);
+
+        $section = SectionName::findOrFail($id);
+
+        $section->update($validatedData);
+
+        return redirect()->route('section.index')->with('success', 'Section Updated');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $this->authorize('is_admin');
+
+        SectionName::findOrFail($id)->delete();
+
+        return redirect()->back()->with('error', 'Section Deleted');
+
     }
 }
