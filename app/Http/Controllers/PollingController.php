@@ -85,7 +85,7 @@ class PollingController extends Controller
                 $query->withCount('members');
             }])
             ->where('id', $id)
-            ->orderBy('id')
+            ->orderBy('SNO')
             ->first();
 
 //        dd($constituency);
