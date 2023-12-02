@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePollingStationRequest;
-use App\Http\Requests\UpdatePollingStationRequest;
 use App\Models\Constituency;
-use App\Models\District;
 use App\Models\PollingStation;
-use App\Models\SectionName;
 use Illuminate\Http\Request;
 
 class PollingController extends Controller
