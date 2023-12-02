@@ -16,22 +16,26 @@ class SectionNameController extends Controller
     {
         $query = $request->input('query');
 
-        // Use a conditional check to determine whether a search query is provided
         if ($query) {
-            $sectionnames = SectionName::where('name', 'LIKE', '%' . $query . '%')
-                ->with('pollingstation')
+            $pollingstations = PollingStation::whereHas('sectionnames', function ($sectionNamesQuery) use ($query) {
+                $sectionNamesQuery->where('name', 'LIKE', '%' . $query . '%');
+            })
+                ->with('sectionnames')
                 ->orderBy('id')
                 ->paginate(10)
                 ->appends(['query' => $query]);
         } else {
-            // If no search query is provided, retrieve all records without the WHERE clause
-            $sectionnames = SectionName::with('pollingstation')
+            $pollingstations = PollingStation::with('sectionnames')
                 ->orderBy('id')
                 ->paginate(10);
         }
 
-        return view('layouts.Section.section', compact('sectionnames'));
+        return view('layouts.Section.section', compact('pollingstations'));
     }
+
+
+
+
 
 
     /**

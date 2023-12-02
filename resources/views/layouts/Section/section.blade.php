@@ -76,7 +76,6 @@
                                 <div class="rounded overflow-hidden border border-gray-700 my-5 ">
                                     <!-- accordion-tab  -->
                                     <div class="mx-auto">
-
                                         <div class="flex flex-col">
                                             <div class="overflow-x-auto">
                                                 <div class="inline-block min-w-full align-middle">
@@ -84,23 +83,24 @@
                                                         <div class="p-2 ">
                                                             <div class="overflow-x-auto">
 
-
                                                                 <table
                                                                     class="min-w-full text-left text-sm font-light">
                                                                     <thead
                                                                         class="border-b font-medium dark:border-neutral-500">
                                                                     <tr>
+{{--                                                                        <th scope="col"--}}
+{{--                                                                            class="px-6 py-4">--}}
+{{--                                                                            ID--}}
+{{--                                                                        </th>--}}
                                                                         <th scope="col"
                                                                             class="px-6 py-4">
-                                                                            ID
+                                                                            Polling Station(Locality)
+
                                                                         </th>
                                                                         <th scope="col"
                                                                             class="px-6 py-4">
                                                                             Section Name
-                                                                        </th>
-                                                                        <th scope="col"
-                                                                            class="px-6 py-4">
-                                                                            Polling Station(Locality)
+
                                                                         </th>
 
 
@@ -117,59 +117,81 @@
 
                                                                     </tr>
                                                                     </thead>
-                                                                    @foreach($sectionnames as $section)
-                                                                        <tbody>
+                                                                    @foreach($pollingstations as $pollingstation)
 
+                                                                        <tbody>
 
                                                                         <tr
                                                                             class="border-b dark:border-neutral-500">
-                                                                            <td
-                                                                                class="whitespace-nowrap px-6 py-4 font-medium">
-                                                                                {{$section->id}}
-                                                                            </td>
+{{--                                                                            <td--}}
+{{--                                                                                class="whitespace-nowrap px-6 py-4 font-medium">--}}
+{{--                                                                                <ul class="list-disc">--}}
+
+{{--                                                                                    @foreach($pollingstation->sectionnames as $sectionname)--}}
+{{--                                                                                        <li>--}}
+{{--                                                                                            {{$sectionname->id}}--}}
+{{--                                                                                        </li>--}}
+{{--                                                                                    @endforeach--}}
+
+{{--                                                                                </ul>--}}
+{{--                                                                            </td>--}}
                                                                             <td
                                                                                 class="whitespace-nowrap px-6 py-4">
-                                                                                {{$section->name}}
+
+                                                                                {{$pollingstation->locality}}
+
                                                                             </td>
                                                                             <td
                                                                                 class="whitespace-nowrap px-6 py-4">
 
                                                                                 <ul class="list-disc">
-                                                                                    <li>
-                                                                                        {{$section->pollingstation->locality}}
 
-                                                                                    </li>
+                                                                                    @foreach($pollingstation->sectionnames as $sectionname)
 
+                                                                                        <li>
+                                                                                            {{$sectionname->name}}
+                                                                                        </li>
+
+                                                                                    @endforeach
                                                                                 </ul>
+
 
                                                                             </td>
 
 
                                                                             @can('is_admin')
-                                                                                <td
-                                                                                    class="whitespace-nowrap px-6 py-4">
-                                                                                    <a
-                                                                                        href="{{route('section.edit', [$section->id])}}">
-                                                                                        <i
-                                                                                            class="fa-solid fa-pen-to-square"></i>
+                                                                                <td class="whitespace-nowrap px-6 py-4 flex flex-col gap-1">
 
-                                                                                    </a>
-                                                                                </td>
-                                                                                <td
-                                                                                    class="whitespace-nowrap px-6 py-4">
-                                                                                    <form
-                                                                                        action="{{route('section.destroy', [$section->id])}}"
-                                                                                        onsubmit="return confirm('Warning: Are You Sure You Want To Delete This Data? Your Data Will Be Lost');"
-                                                                                        method="POST">
-                                                                                        @csrf
-                                                                                        @method('DELETE')
-                                                                                        <button
-                                                                                            type="submit">
+                                                                                    @foreach($pollingstation->sectionnames as $sectionname)
+
+                                                                                        <a
+                                                                                            href="{{route('section.edit', [$sectionname->id])}}">
                                                                                             <i
-                                                                                                class="fa-solid fa-trash"></i>
-                                                                                        </button>
+                                                                                                class="fa-solid fa-pen-to-square"></i>
 
-                                                                                    </form>
+                                                                                        </a>
+                                                                                    @endforeach
+                                                                                </td>
+
+
+                                                                                <td
+                                                                                    class="whitespace-nowrap px-6 py-4">
+                                                                                    @foreach($pollingstation->sectionnames as $sectionname)
+                                                                                        <form
+                                                                                            action="{{route('section.destroy', [$sectionname->id])}}"
+                                                                                            onsubmit="return confirm('Warning: Are You Sure You Want To Delete This Data? Your Data Will Be Lost');"
+                                                                                            method="POST">
+                                                                                            @csrf
+                                                                                            @method('DELETE')
+                                                                                            <button
+                                                                                                type="submit">
+                                                                                                <i
+                                                                                                    class="fa-solid fa-trash"></i>
+                                                                                            </button>
+
+                                                                                        </form>
+                                                                                    @endforeach
+
                                                                                 </td>
 
                                                                             @endcan
@@ -196,7 +218,7 @@
 
                         </div>
                     </div>
-                    {{$sectionnames->links()}}
+                    {{$pollingstations->links()}}
                 </div>
             </div>
         </div>
