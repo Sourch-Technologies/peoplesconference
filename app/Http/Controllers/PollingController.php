@@ -16,8 +16,6 @@ class PollingController extends Controller
     /**
      * Display a listing of the resource.
      */
-
-
     public function index(Request $request)
     {
         $query = $request->input('query');
@@ -39,9 +37,6 @@ class PollingController extends Controller
 
         return view('layouts.PollingStation.pollingStation', compact('pollingStations'));
     }
-
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -81,17 +76,20 @@ class PollingController extends Controller
 
         $constituency = Constituency::query()
             ->select('id', 'name')
-            ->with(['pollingstations.sectionnames' => function ($query) {
-                $query->withCount('members');
+            ->with(['pollingstations' => function ($query) {
+                $query
+                    ->select('locality', 'building_location', 'polling_area', 'total_votes', 'constituency_id', 'id', 'SNO')
+                    ->orderBy('SNO', 'asc')
+                    ->with(['sectionnames' => function ($query) {
+                        $query
+                            ->select('id', 'polling_station_id', 'name')
+                            ->withCount('members');
+                    }]);
             }])
             ->where('id', $id)
-//            ->orderBy('SNO')
             ->first();
 
-//        dd($constituency);
-
         return view('layouts.PollingStation.Constituency_pollingstation', compact('constituency'));
-
 
     }
 
