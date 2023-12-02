@@ -15,7 +15,7 @@ class SectionNameController extends Controller
     public function index()
     {
 
-        $sections = SectionName::with('members')->orderBy('id')->get();
+        $sections = SectionName::with('members')->orderBy('id')->paginate(1);
 
         return view('layouts.Section.section', compact('sections'));
 

@@ -194,7 +194,7 @@
 
                         </div>
                     </div>
-
+                    {{$sections->links()}}
                 </div>
             </div>
         </div>
