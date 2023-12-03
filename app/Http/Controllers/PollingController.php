@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class PollingController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
@@ -17,36 +16,21 @@ class PollingController extends Controller
     {
         $query = $request->input('query');
 
-        $pollingStations = PollingStation::with(['sectionnames' => function ($s) {
-            $s->withCount('members');
-        }])
-            ->where(function ($q) use ($query) {
-
-                if ($query) {
-                    $q->where('SNO', 'LIKE', '%' . $query . '%')
-                        ->orWhere('locality', 'LIKE', '%' . $query . '%')
-                        ->orWhere('building_location', 'LIKE', '%' . $query . '%');
-                }
-            })
-            ->orderBy('SNO', 'asc')
-            ->paginate(10)
-            ->appends(['query' => $query]);
+        $pollingStations = PollingStation::with([
+            'sectionnames' => function ($s) {
+                $s->withCount('members');
+            }
+        ])->where(function ($q) use ($query) {
+            if ($query) {
+                $q->where('SNO', 'LIKE', '%' . $query . '%')->orWhere('locality', 'LIKE', '%' . $query . '%')->orWhere(
+                    'building_location',
+                    'LIKE',
+                    '%' . $query . '%'
+                );
+            }
+        })->orderBy('SNO', 'asc')->paginate(10)->appends(['query' => $query]);
 
         return view('layouts.PollingStation.pollingStation', compact('pollingStations'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-
-        $this->authorize('is_admin');
-
-        $constituencies = Constituency::all();
-
-        return view('layouts.PollingStation.create-polling', compact('constituencies'));
-
     }
 
     /**
@@ -54,7 +38,6 @@ class PollingController extends Controller
      */
     public function store(StorePollingStationRequest $request)
     {
-
         $this->authorize('is_admin');
 
         $data = $request->validated();
@@ -62,7 +45,18 @@ class PollingController extends Controller
         Constituency::query()->findOrFail($data['constituency_id'])->pollingstations()->create($data);
 
         return redirect()->route('pollingstation.index')->with('success', 'Polling Station Created');
+    }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $this->authorize('is_admin');
+
+        $constituencies = Constituency::all();
+
+        return view('layouts.PollingStation.create-polling', compact('constituencies'));
     }
 
     /**
@@ -70,24 +64,28 @@ class PollingController extends Controller
      */
     public function show(string $id)
     {
-
-        $constituency = Constituency::query()
-            ->select('id', 'name')
-            ->with(['pollingstations' => function ($query) {
+        $constituency = Constituency::query()->select('id', 'name')->with([
+            'pollingstations' => function ($query) {
                 $query
-                    ->select('locality', 'building_location', 'polling_area', 'total_votes', 'constituency_id', 'id', 'SNO')
+                    ->select(
+                        'locality',
+                        'building_location',
+                        'polling_area',
+                        'total_votes',
+                        'constituency_id',
+                        'id',
+                        'SNO'
+                    )
                     ->orderBy('SNO', 'asc')
-                    ->with(['sectionnames' => function ($query) {
-                        $query
-                            ->select('id', 'polling_station_id', 'name')
-                            ->withCount('members');
-                    }]);
-            }])
-            ->where('id', $id)
-            ->first();
+                    ->with([
+                        'sectionnames' => function ($query) {
+                            $query->select('id', 'polling_station_id', 'name')->withCount('members');
+                        }
+                    ]);
+            }
+        ])->where('id', $id)->first();
 
         return view('layouts.PollingStation.Constituency_pollingstation', compact('constituency'));
-
     }
 
     /**
@@ -95,7 +93,6 @@ class PollingController extends Controller
      */
     public function edit($id)
     {
-
         $this->authorize('is_admin');
 
         $polling_station = PollingStation::query()->findOrFail($id);
@@ -103,7 +100,6 @@ class PollingController extends Controller
         $constituencies = Constituency::all();
 
         return view('layouts.PollingStation.edit-polling', compact('polling_station', 'constituencies'));
-
     }
 
     /**
@@ -111,8 +107,6 @@ class PollingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
-
         // Validate the form data
         $validatedData = $request->validate([
             'SNO' => 'required|numeric|unique:polling_stations,SNO,' . $id,
@@ -131,8 +125,6 @@ class PollingController extends Controller
 
         // Redirect to the index page with a success message
         return redirect()->route('pollingstation.index')->with('success', 'Polling Station updated successfully');
-
-
     }
 
     /**
@@ -140,7 +132,6 @@ class PollingController extends Controller
      */
     public function destroy($id)
     {
-
         $this->authorize('is_admin');
 
         $pollingstation = PollingStation::findOrfail($id);
@@ -148,10 +139,10 @@ class PollingController extends Controller
         $pollingstation->delete();
 
         return redirect()->back()->with('success', 'Polling Station Deleted');
-
     }
-    public function fetchSections($id){
 
+    public function fetchSections($id)
+    {
         $pollingstations = PollingStation::where('constituency_id', $id)->get();
 
         if ($pollingstations->isEmpty()) {
@@ -159,6 +150,5 @@ class PollingController extends Controller
         }
 
         return response()->json($pollingstations);
-
     }
 }

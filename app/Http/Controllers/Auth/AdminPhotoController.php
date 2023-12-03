@@ -10,7 +10,6 @@ class AdminPhotoController extends Controller
 {
     public function update_photo(Request $request, PhotoService $photoService)
     {
-
         $request->validate(['photo' => 'mimes:jpeg,png,jpg,gif|max:2048',]);
 
         $user = auth()->user();
@@ -18,7 +17,6 @@ class AdminPhotoController extends Controller
         $photoService->UpdatePhoto($user, $request);
 
         return redirect()->to('/dashboard');
-
     }
 
 

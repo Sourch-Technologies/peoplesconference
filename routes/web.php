@@ -26,13 +26,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/home', function (Request $request) {
-
-
-//     $user = $request->user();
-
-
-// })->middleware(['auth', 'verified'])->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
