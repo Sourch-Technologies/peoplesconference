@@ -109,7 +109,7 @@ class PollingController extends Controller
     {
         // Validate the form data
         $validatedData = $request->validate([
-            'SNO' => 'required|numeric|unique:polling_stations,SNO,' . $id,
+            'SNO' => 'required|numeric',
             'locality' => 'required|string|unique:polling_stations,locality,' . $id,
             'building_location' => 'required|string',
             'polling_area' => 'required|string',

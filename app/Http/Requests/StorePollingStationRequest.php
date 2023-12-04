@@ -23,7 +23,7 @@ class StorePollingStationRequest extends FormRequest
     {
         return [
 
-            'SNO' => 'required|numeric|unique:polling_stations,SNO',
+            'SNO' => 'required|numeric',
             'locality' => 'required|string|unique:polling_stations,locality',
             'building_location' => 'required|string',
             'polling_area' => 'required|string',
