@@ -28,7 +28,7 @@ class PollingController extends Controller
                     '%' . $query . '%'
                 );
             }
-        })->orderBy('SNO', 'asc')->paginate(10)->appends(['query' => $query]);
+        })->orderBy('polling_area', 'asc')->paginate(10)->appends(['query' => $query]);
 
         return view('layouts.PollingStation.pollingStation', compact('pollingStations'));
     }
