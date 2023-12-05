@@ -15,49 +15,63 @@ class MemberController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index(Request $request)
     {
         $query = $request->input('query');
+        $searchBy = $request->input('searchBy', 'name'); // Default to searching by name
 
-        if ($query) {
+        $members = Memeber::query()
+            ->when($query, function ($queryBuilder) use ($query, $searchBy) {
+                // Use a switch statement to handle different search fields
+                switch ($searchBy) {
+                    case 'email':
+                        $queryBuilder->where('email', 'LIKE', '%' . $query . '%');
+                        break;
+                    case 'section_name':
+                        $queryBuilder->whereHas('sectionname', function ($sectionQuery) use ($query) {
+                            $sectionQuery->where('name', 'LIKE', '%' . $query . '%');
+                        });
+                        break;
+                    case 'polling_station':
+                        $queryBuilder->whereHas('sectionname.pollingstation', function ($pollingQuery) use ($query) {
+                            $pollingQuery->where('locality', 'LIKE', '%' . $query . '%');
+                        });
+                        break;
+                    case 'constituency':
+                        $queryBuilder->whereHas('sectionname.pollingstation.constituency', function ($constituencyQuery) use ($query) {
+                            $constituencyQuery->where('name', 'LIKE', '%' . $query . '%');
+                        });
+                        break;
+                    case 'district':
+                        $queryBuilder->whereHas('sectionname.pollingstation.constituency.district', function ($districtQuery) use ($query) {
+                            $districtQuery->where('name', 'LIKE', '%' . $query . '%');
+                        });
+                        break;
+                    default:
+                        $queryBuilder->where('name', 'LIKE', '%' . $query . '%');
+                        break;
+                }
+            })
+            ->with('sectionname.pollingstation.constituency.district')
+            ->paginate(10)
+            ->appends(['query' => $query, 'searchBy' => $searchBy]);
 
+        $member_count = Memeber::all()->count();
 
-            $members = Memeber::where('name', 'LIKE', '%' . $query . '%')
-                ->with([
-                    'sectionname.pollingstation.constituency.district',
-                ])->paginate(10)->appends(['query' => $query]);
-
-//            dd($members);
-            $member_count = Memeber::all()->count();
-
-            return view('layouts.Member.members', compact('member_count', 'members'));
-
-        } else {
-            $members = Memeber::with([
-                    'sectionname.pollingstation.constituency.district',
-                ])->paginate(10)->appends(['query' => $query]);
-
-            $member_count = Memeber::all()->count();
-
-            return view('layouts.Member.members', compact('member_count', 'members'));
-        }
+        return view('layouts.Member.members', compact('member_count', 'members', 'searchBy'));
     }
 
-
-
-
-    /**
+/**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-
         $this->authorize('is_admin');
 
         $pollingstations = PollingStation::pluck('id', 'locality')->all();
 
         return view('layouts.Member.create-member', compact('pollingstations'));
-
     }
 
     /**
@@ -65,7 +79,6 @@ class MemberController extends Controller
      */
     public function store(Request $request, Memeber $memeber)
     {
-
         $this->authorize('is_admin');
 
         $validatedData = $request->validate([
@@ -81,13 +94,11 @@ class MemberController extends Controller
 
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
-
             $file = $request->file('photo');
 
             $fileName = time() . '_' . $file->getClientOriginalName();
 
             $file->storeAs('public/photos', $fileName);
-
         }
 
         $memeber->create([
@@ -103,8 +114,6 @@ class MemberController extends Controller
 
         // Redirect to a success page or wherever you want
         return redirect()->route('member.index')->with('success', 'Member created successfully.');
-
-
     }
 
     /**
@@ -120,7 +129,6 @@ class MemberController extends Controller
      */
     public function edit(string $id)
     {
-
         $this->authorize('is_admin');
 
         $member = Memeber::query()->findOrFail($id);
@@ -130,7 +138,6 @@ class MemberController extends Controller
         $pollingstations = PollingStation::pluck('id', 'locality')->all();
 
         return view('layouts.Member.edit-member', compact('member', 'sectionnames', 'pollingstations'));
-
     }
 
     /**
@@ -138,7 +145,6 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $this->authorize('is_admin');
 
         $member = Memeber::findOrFail($id);
@@ -155,7 +161,6 @@ class MemberController extends Controller
         $validatedData = $request->only(['name', 'email', 'phone', 'gender', 'section_name_id']);
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
-
             if ($member->photo) {
                 Storage::delete('public/photos/' . $member->photo);
             }
@@ -163,7 +168,6 @@ class MemberController extends Controller
             $fileName = time() . '_' . $request->file('photo')->getClientOriginalName();
             $request->file('photo')->storeAs('public/photos', $fileName);
             $validatedData['photo'] = $fileName;
-
         }
 
         $member->update($validatedData);
@@ -177,7 +181,6 @@ class MemberController extends Controller
      */
     public function destroy(string $id)
     {
-
         $this->authorize('is_admin');
 
         $member = Memeber::query()->findOrFail($id);
@@ -189,11 +192,10 @@ class MemberController extends Controller
         $member->destroy($id);
 
         return redirect()->back()->with('success', 'Member Deleted');
-
     }
 
-    public function fetchsections($id){
-
+    public function fetchsections($id)
+    {
         $sectionnames = SectionName::where('polling_station_id', $id)->get();
 
         if ($sectionnames->isEmpty()) {
@@ -201,6 +203,5 @@ class MemberController extends Controller
         }
 
         return response()->json($sectionnames);
-
     }
 }

@@ -7,6 +7,8 @@ use App\Models\Constituency;
 use App\Models\PollingStation;
 use Illuminate\Http\Request;
 
+use function Laravel\Prompts\select;
+
 class PollingController extends Controller
 {
     /**
@@ -64,26 +66,30 @@ class PollingController extends Controller
      */
     public function show(string $id)
     {
-        $constituency = Constituency::query()->select('id', 'name')->with([
-            'pollingstations' => function ($query) {
-                $query
-                    ->select(
-                        'locality',
-                        'building_location',
-                        'polling_area',
-                        'total_votes',
-                        'constituency_id',
-                        'id',
-                        'SNO'
-                    )
-                    ->orderBy('SNO', 'asc')
-                    ->with([
-                        'sectionnames' => function ($query) {
-                            $query->select('id', 'polling_station_id', 'name')->withCount('members');
-                        }
-                    ]);
-            }
-        ])->where('id', $id)->first();
+        $constituency = Constituency::query()
+            ->select('id', 'name')
+            ->with([
+                'pollingstations' => function ($query) {
+                    $query
+                        ->select(
+                            'locality',
+                            'building_location',
+                            'polling_area',
+                            'total_votes',
+                            'constituency_id',
+                            'id',
+                            'SNO'
+                        )
+                        ->orderBy('SNO', 'asc')
+                        ->with([
+                            'sectionnames' => function ($query) {
+                                $query->select('id', 'polling_station_id', 'name')->withCount('members');
+                            }
+                        ])
+                        ;
+                }
+            ])->where('id', $id)->first();
+
 
         return view('layouts.PollingStation.Constituency_pollingstation', compact('constituency'));
     }
