@@ -41,20 +41,20 @@
                                         <tbody>
                                             @foreach ($constituency->pollingstations as $pollingStation)
                                                 <tr class="border-b dark:border-neutral-500">
-                                                    <td class="whitespace-nowrap font-medium">
+                                                    <td class="whitespace-nowrap py-2 font-medium">
                                                         {{ $pollingStation->SNO }}</td>
-                                                    <td class="whitespace-nowrap ">
+                                                    <td class="whitespace-nowrap py-2">
                                                         {{ $pollingStation->locality }}</td>
-                                                    <td class="whitespace-nowrap ">
+                                                    <td class="whitespace-nowrap py-2">
                                                         {{ $pollingStation->building_location }}
                                                     </td>
-                                                    <td class="whitespace-nowrap ">
+                                                    <td class="whitespace-nowrap py-2">
                                                         {{ $pollingStation->polling_area }}
                                                     </td>
-                                                    <td class="whitespace-nowrap">
+                                                    <td class="whitespace-nowrap py-2">
                                                         {{ $pollingStation->total_votes }}
                                                     </td>
-                                                    <td class="whitespace-nowrap ">
+                                                    <td class="whitespace-nowrap py-2">
                                                         <ul>
                                                             @foreach ($pollingStation->sectionnames as $sectionname)
                                                                 <li>
@@ -72,13 +72,13 @@
                                                         @endforeach
                                                         </ul>
                                                     </td>
-                                                    <td class="whitespace-nowrap">
+                                                    <td class="whitespace-nowrap py-2">
                                                         <a
                                                             href="{{ route('pollingstation.edit', [$pollingStation->id]) }}">
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                         </a>
                                                     </td>
-                                                    <td class="whitespace-nowrap">
+                                                    <td class="whitespace-nowrap py-2">
                                                         <form
                                                             action="{{ route('pollingstation.destroy', [$pollingStation->id]) }}"
                                                             method="POST">
